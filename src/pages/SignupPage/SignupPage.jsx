@@ -8,19 +8,19 @@ import Button from '../../components/Forms/Button';
 function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
+  const handleUsername = (e) => setUsername(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, username };
 
     // Send a request to the server using axios
     /* 
@@ -55,9 +55,9 @@ function SignupPage() {
         <Input
           label='Username'
           type='text'
-          name='name'
-          value={name}
-          onChange={handleName}
+          name='username'
+          value={username}
+          onChange={handleUsername}
         />
         <Input
           label='E-mail'
