@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 import FeedPage from './pages/FeedPage/FeedPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import PostPage from './pages/PostPage/PostPage';
 
 import Navbar from './components/Navbar/Navbar';
 import IsPrivate from './components/IsPrivate/IsPrivate';
@@ -23,6 +24,15 @@ function App() {
           element={
             <IsPrivate>
               <FeedPage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path='/post'
+          element={
+            <IsPrivate>
+              <PostPage />
             </IsPrivate>
           }
         />

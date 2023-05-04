@@ -7,6 +7,7 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [post, setPost] = useState(null);
 
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
@@ -37,6 +38,7 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
+          setPost(post)
         })
         .catch((error) => {
           // If the server sends an error response (invalid token) ❌
