@@ -6,6 +6,7 @@ import FeedPage from './pages/FeedPage/FeedPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import PostPage from './pages/PostPage/PostPage';
+import NewPostPage from './pages/NewPostPage/NewPostPage';
 
 import Navbar from './components/Navbar/Navbar';
 import IsPrivate from './components/IsPrivate/IsPrivate';
@@ -33,6 +34,15 @@ function App() {
           element={
             <IsPrivate>
               <PostPage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path='/newpost'
+          element={
+            <IsPrivate>
+              <NewPostPage />
             </IsPrivate>
           }
         />
