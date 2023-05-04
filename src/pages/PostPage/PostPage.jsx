@@ -1,24 +1,25 @@
-import React from 'react'
-import './PostPage.css'
+import React from 'react';
+import './PostPage.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
 import { Link } from 'react-router-dom';
-import FeedPage from '../FeedPage/FeedPage';
+import ProfilePage from '../ProfilePage/ProfilePage';
 
 const PostPage = () => {
-    const { isLoggedIn, post } = useContext(AuthContext);
-    return (
-      <div>
-        <h1>{post}'s Post</h1>
-        {isLoggedIn && (
-          <>
-          here render post details
-          </>
-        )}
-        <br />
-        <Link to="/feed" content={<FeedPage />}>Back</Link>
-      </div>
-    );
-}
+  const { user } = useContext(AuthContext);
 
-export default PostPage
+  console.log('user', user);
+
+  return (
+    <div>
+      <h1>Create Post</h1>
+      <>here render post details</>
+      <br />
+      <Link to='/profile' content={<ProfilePage />}>
+        Back
+      </Link>
+    </div>
+  );
+};
+
+export default PostPage;

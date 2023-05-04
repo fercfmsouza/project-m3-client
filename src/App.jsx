@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/HomePage/HomePage';
-import FeedPage from './pages/FeedPage/FeedPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import PostPage from './pages/PostPage/PostPage';
@@ -10,7 +10,6 @@ import NewPostPage from './pages/NewPostPage/NewPostPage';
 
 import Navbar from './components/Navbar/Navbar';
 import IsPrivate from './components/IsPrivate/IsPrivate';
-import IsAnon from './components/IsAnon/IsAnon';
 
 function App() {
   return (
@@ -21,10 +20,10 @@ function App() {
         <Route path='/' element={<HomePage />} />
 
         <Route
-          path='/feed'
+          path='/profile'
           element={
             <IsPrivate>
-              <FeedPage />
+              <ProfilePage />
             </IsPrivate>
           }
         />
@@ -47,22 +46,8 @@ function App() {
           }
         />
 
-        <Route
-          path='/signup'
-          element={
-            <IsAnon>
-              <SignupPage />
-            </IsAnon>
-          }
-        />
-        <Route
-          path='/login'
-          element={
-            <IsAnon>
-              <LoginPage />
-            </IsAnon>
-          }
-        />
+        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </div>
   );
