@@ -1,12 +1,14 @@
-import "./SignupPage.css";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import authService from "../../services/auth.service";
+import './SignupPage.css';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import authService from '../../services/auth.service';
+import Input from '../../components/Forms/Input';
+import Button from '../../components/Forms/Button';
 
 function SignupPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ function SignupPage() {
       .signup(requestBody)
       .then((response) => {
         // If the POST request is successful redirect to the login page
-        navigate("/login");
+        navigate('/login');
       })
       .catch((error) => {
         // If the request resolves with an error, set the error message in the state
@@ -46,31 +48,38 @@ function SignupPage() {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className='SignupPage'>
+      <h1>Create account</h1>
 
       <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
+        <Input
+          label='Username'
+          type='text'
+          name='name'
+          value={name}
+          onChange={handleName}
+        />
+        <Input
+          label='E-mail'
+          type='email'
+          name='email'
+          value={email}
+          onChange={handleEmail}
+        />
+        <Input
+          label='Password'
+          type='password'
+          name='password'
           value={password}
           onChange={handlePassword}
         />
-
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-
-        <button type="submit">Sign Up</button>
+        <Button type='submit'>Create</Button>
       </form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <p className='error-message'>{errorMessage}</p>}
 
       <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <Link to={'/login'}> Login</Link>
     </div>
   );
 }

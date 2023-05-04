@@ -1,25 +1,25 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
 
-import HomePage from "./pages/HomePage/HomePage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import SignupPage from "./pages/SignupPage/SignupPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
+import HomePage from './pages/HomePage/HomePage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import SignupPage from './pages/SignupPage/SignupPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
-import Navbar from "./components/Navbar/Navbar";
-import IsPrivate from "./components/IsPrivate/IsPrivate";
-import IsAnon from "./components/IsAnon/IsAnon";
+import Navbar from './components/Navbar/Navbar';
+import IsPrivate from './components/IsPrivate/IsPrivate';
+import IsAnon from './components/IsAnon/IsAnon';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path='/' element={<HomePage />} />
 
         <Route
-          path="/profile"
+          path='/profile'
           element={
             <IsPrivate>
               <ProfilePage />
@@ -28,7 +28,7 @@ function App() {
         />
 
         <Route
-          path="/signup"
+          path='/signup'
           element={
             <IsAnon>
               <SignupPage />
@@ -36,7 +36,7 @@ function App() {
           }
         />
         <Route
-          path="/login"
+          path='/login'
           element={
             <IsAnon>
               <LoginPage />

@@ -1,0 +1,9 @@
+.error-message {
+  color: #f31;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.LoginPage h1 {
+  font-family: 'Source Serif Pro';
+}

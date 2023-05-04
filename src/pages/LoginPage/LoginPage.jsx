@@ -1,12 +1,14 @@
-import "./LoginPage.css";
-import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
-import authService from "../../services/auth.service";
+import './LoginPage.css';
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
+import authService from '../../services/auth.service';
+import Input from '../../components/Forms/Input';
+import Button from '../../components/Forms/Button';
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ function LoginPage() {
         // and at last navigate to the home page
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/");
+        navigate('/');
       })
       .catch((error) => {
         // If the request resolves with an error, set the error message in the state
@@ -45,27 +47,31 @@ function LoginPage() {
   };
 
   return (
-    <div className="LoginPage">
+    <div className='LoginPage'>
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
+        <Input
+          label='E-mail'
+          type='email'
+          name='email'
+          value={email}
+          onChange={handleEmail}
+        />
+        <Input
+          label='Password'
+          type='password'
+          name='password'
           value={password}
           onChange={handlePassword}
         />
-
-        <button type="submit">Login</button>
+        <Button type='submit'>Login</Button>
       </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      {errorMessage && <p className='error-message'>{errorMessage}</p>}
+
+      <p>Don't have an account yet? Create account.</p>
+      <Link to={'/signup'}>Create</Link>
     </div>
   );
 }

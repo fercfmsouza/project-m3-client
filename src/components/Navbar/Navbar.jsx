@@ -1,7 +1,7 @@
-import "./Navbar.css";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth.context";
+import './Navbar.css';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth.context';
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
@@ -9,37 +9,34 @@ function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
-    <nav>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+    <header className='header'>
+      <nav className='container nav'>
+        <Link className='logo' to='/'>
+          <img src='../../../logo.svg' alt='pets-logo' />
+        </Link>
 
-      {isLoggedIn && (
-        <>
-          <button onClick={logOutUser}>Logout</button>
+        {isLoggedIn && (
+          <>
+            <button onClick={logOutUser}>Logout</button>
 
-          <Link to="/profile">
-            <button>Profile</button>
-            {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
-          </Link>
+            <Link to='/profile'>Profile</Link>
 
-          <span>{user && user.name}</span>
-        </>
-      )}
+            <span>{user && user.name}</span>
+          </>
+        )}
 
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            {" "}
-            <button>Sign Up</button>{" "}
-          </Link>
-          <Link to="/login">
-            {" "}
-            <button>Login</button>{" "}
-          </Link>
-        </>
-      )}
-    </nav>
+        {!isLoggedIn && (
+          <>
+            <div className='links'>
+              <Link to='/signup'>Sign Up</Link>
+              <Link className='login' to='/login'>
+                Login
+              </Link>
+            </div>
+          </>
+        )}
+      </nav>
+    </header>
   );
 }
 
