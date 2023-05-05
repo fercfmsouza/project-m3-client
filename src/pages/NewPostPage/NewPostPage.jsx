@@ -6,9 +6,10 @@ const NewPostPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const myTest = e.target.myTest.value;
+    const description = e.target.description.value;
+    const image = e.target.image.value;
 
-    const response = await api.post('/posts/create', { myTest });
+    const response = await api.post('/posts/create', { description, image });
 
     console.log('response', response);
   };
@@ -17,12 +18,10 @@ const NewPostPage = () => {
     <div>
       <h1>New Post</h1>
       <form onSubmit={handleSubmit}>
-        {/* <label>Post Description</label>
-        <input type='text' />
+        <label>Post Description</label>
+        <input type='text' name='description' />
         <label>Post Image</label>
-        <input type='file' id='img' /> */}
-
-        <input type='text' name='myTest' />
+        <input type='file' id='img' name='image' />
 
         <button type='submit'>Create Post</button>
       </form>
