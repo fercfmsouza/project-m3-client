@@ -22,20 +22,23 @@ function Navbar() {
         {isLoggedIn && (
           <>
           <div className="menu-icon" onClick={handleClick}>
-            <i className={click ? 
-              <img src='../../../close-icon.png' alt='close menu'/> : 
-              <img src='../../../menu-icon.png' alt='bar menu'/>} />
+            {click && (
+              <img src="../../../close-icon.png" alt="close menu" />
+            )}
+            {!click && (
+              <img src="../../../menu-icon.png" alt="bar menu" />
+            )}
           </div>
           
           <ul className={click ? 'nav-menu active' : 'nav-menu'}></ul>
             <li className='nav-item'>
-              <Link to='/profile'>
+              <Link to='/profile' className='nav-links' onClick={closeMobileMenu}>
                 @{user.username.toLowerCase()}
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={logOutUser}>
-                Log out
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                <button onClick={logOutUser}>Log out</button>
               </Link>
             </li>
               <Link to='/' className='nav-links' onClick={closeMobileMenu} />

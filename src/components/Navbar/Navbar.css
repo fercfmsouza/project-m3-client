@@ -37,3 +37,7 @@
   background: url('../../../public/login.svg') no-repeat center center;
   margin-left: 0.5rem;
 }
+
+.menu-icon {
+  width: 5vw;
+}
