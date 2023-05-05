@@ -9,6 +9,7 @@ import PostPage from './pages/PostPage/PostPage';
 import NewPostPage from './pages/NewPostPage/NewPostPage';
 
 import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 import IsPrivate from './components/IsPrivate/IsPrivate';
 
 function App() {
@@ -16,39 +17,43 @@ function App() {
     <div className='App'>
       <Navbar />
 
-      <Routes>
-        <Route path='/' element={<HomePage />} />
+      <main className='AppBody'>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
 
-        <Route
-          path='/profile'
-          element={
-            <IsPrivate>
-              <ProfilePage />
-            </IsPrivate>
-          }
-        />
+          <Route
+            path='/profile'
+            element={
+              <IsPrivate>
+                <ProfilePage />
+              </IsPrivate>
+            }
+          />
 
-        <Route
-          path='/post'
-          element={
-            <IsPrivate>
-              <PostPage />
-            </IsPrivate>
-          }
-        />
+          <Route
+            path='/post'
+            element={
+              <IsPrivate>
+                <PostPage />
+              </IsPrivate>
+            }
+          />
 
-        <Route
-          path='/newpost'
-          element={
-            <IsPrivate>
-              <NewPostPage />
-            </IsPrivate>
-          }
-        />
+          <Route
+            path='/newpost'
+            element={
+              <IsPrivate>
+                <NewPostPage />
+              </IsPrivate>
+            }
+          />
 
-        <Route path='/signup' element={<SignupPage />} />
-        <Route path='/login' element={<LoginPage />} />
-      </Routes>
+          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/login' element={<LoginPage />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </div>
   );
 }
