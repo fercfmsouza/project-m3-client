@@ -17,12 +17,13 @@ function Navbar() {
 
         {isLoggedIn && (
           <>
-             <span>
+
+            <span>
               {user && (
                 <Link to='/profile'>@{user.username.toLowerCase()}</Link>
               )}
             </span>
-            
+
             <button onClick={logOutUser}>Logout</button>
           </>
         )}
