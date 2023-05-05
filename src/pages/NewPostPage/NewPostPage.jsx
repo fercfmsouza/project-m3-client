@@ -1,30 +1,38 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NewPostPage.css';
 import { api } from '../../api';
+import Input from '../../components/Forms/Input';
+import Button from '../../components/Forms/Button';
 
 const NewPostPage = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const myTest = e.target.myTest.value;
+    const description = e.target.description.value;
+    const image = e.target.image.files[0];
 
-    const response = await api.post('/posts/create', { myTest });
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('description', description);
 
-    console.log('response', response);
+    const response = await api.post('/posts', formData, {
+      headers: { 'Content-Type': 'multipart/formdata' },
+    });
+
+    if (response.status === 201) navigate('/post', { state: response.data });
   };
 
   return (
     <div>
       <h1>New Post</h1>
       <form onSubmit={handleSubmit}>
-        {/* <label>Post Description</label>
-        <input type='text' />
-        <label>Post Image</label>
-        <input type='file' id='img' /> */}
+        <Input label='Description' name='description' />
 
-        <input type='text' name='myTest' />
-
-        <button type='submit'>Create Post</button>
+        <Input type='file' name='image' />
+        <Button>Create Post</Button>
       </form>
     </div>
   );

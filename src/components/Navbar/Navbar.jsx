@@ -15,17 +15,15 @@ function Navbar() {
           <img src='../../../logo.svg' alt='pets-logo' />
         </Link>
 
-        {isLoggedIn && (
-          <>
-            <span>
-              {user && (
-                <Link to='/profile'>@{user.username.toLowerCase()}</Link>
-              )}
-            </span>
+        <span>
+          {user && (
+            <Link to={`/profile/${user._id}`}>
+              @{user.username.toLowerCase()}
+            </Link>
+          )}
+        </span>
 
-            <button onClick={logOutUser}>Logout</button>
-          </>
-        )}
+        <button onClick={logOutUser}>Logout</button>
 
         {!isLoggedIn && (
           <>
