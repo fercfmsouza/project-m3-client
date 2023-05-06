@@ -4,9 +4,11 @@ import './NewPostPage.css';
 import { api } from '../../api';
 import Input from '../../components/Forms/Input';
 import Button from '../../components/Forms/Button';
+import { useGoBack } from '../../hooks/useGoBack';
 
 const NewPostPage = () => {
   const navigate = useNavigate();
+  const { goBack } = useGoBack()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ const NewPostPage = () => {
 
         <Input type='file' name='image' />
         <Button>Create Post</Button>
+        <div onClick={goBack}>Back</div>
       </form>
     </div>
   );

@@ -23,14 +23,35 @@ const PostPage = () => {
     }
   }
 
+  
+
+  async function handleEdit() {
+    try {
+      const response = await api.put(`/posts/${state._id}`);
+
+      if (response.status === 200) {
+
+      }
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <div className='PostPage'>
-      <img src={state.image} alt='random_image' />
 
       <h1>{state.owner.username}</h1>
-      <p>{state.description}</p>
 
-      <button onClick={handleDelete}>Delete</button>
+      <img src={state.image} alt='random_image' />
+      {
+        user &&
+        <>
+          <button onClick={handleDelete}>Delete</button>
+          <button onClick={handleEdit}>Edit</button>
+        </>
+      }
+
+      <p>{state.description}</p>
 
       <div onClick={goBack}>Back</div>
     </div>

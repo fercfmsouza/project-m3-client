@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './ProfilePage.css';
-import PostPage from '../PostPage/PostPage';
-import NewPostPage from '../NewPostPage/NewPostPage';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/auth.context';
+
 import { api } from '../../api';
+import { useGoBack } from '../../hooks/useGoBack';
 
 function ProfilePage() {
-  // const { isLoggedIn, user } = useContext(AuthContext);
   const { id } = useParams();
   const [user, setUser] = useState();
+  const { goBack } = useGoBack()
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -33,9 +30,20 @@ function ProfilePage() {
       {user &&
         user.posts.length > 0 &&
         user.posts.map((post) => {
-          return <div key={post._id}>{post.description}</div>;
-        })}
-      <Link to='/newpost'>New Post</Link>
+          return (
+            <Link key={post._id} to='/post' state={post}>
+              <img src={post.image} key={post._id} alt={post.description}/>
+            </Link>
+          )
+        })
+      }
+      {
+        user &&
+        <>
+          <Link to='/newpost'>New Post</Link>
+          <div onClick={goBack}>Back</div>
+        </>
+      }
     </div>
   );
 }
