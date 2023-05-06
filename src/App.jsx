@@ -33,9 +33,7 @@ function App() {
           <Route
             path='/post'
             element={
-              <IsPrivate>
                 <PostPage />
-              </IsPrivate>
             }
           />
 

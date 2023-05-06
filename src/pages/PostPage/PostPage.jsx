@@ -1,14 +1,17 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import './PostPage.css';
 import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { AuthContext } from '../../context/auth.context';
-import { Link } from 'react-router-dom';
-import ProfilePage from '../ProfilePage/ProfilePage';
+import './PostPage.css';
+import { useGoBack } from '../../hooks/useGoBack';
+
 
 const PostPage = () => {
   const { state } = useLocation();
   const { user } = useContext(AuthContext);
+  const { goBack } = useGoBack()
+  
   console.log('user', user);
   console.log('state', state);
 
@@ -19,9 +22,9 @@ const PostPage = () => {
       <h1>{state.owner.username}</h1>
       <p>{state.description}</p>
 
-      <Link to='/profile' content={<ProfilePage />}>
+      <div onClick={goBack}>
         Back
-      </Link>
+      </div>
     </div>
   );
 };

@@ -14,7 +14,7 @@ function ProfilePage() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchUser = async () => {
       try {
         const response = await api.get(`/users/${id}`);
 
@@ -25,11 +25,17 @@ function ProfilePage() {
       }
     };
 
-    fetchPosts();
+    fetchUser();
   }, []);
 
   return (
     <div>
+      {
+        user && user.posts.length > 0 &&
+        user.posts.map((post) => {
+          return <div>{post.description}</div>
+        })
+      }
       <Link to='/newpost'>New Post</Link>
     </div>
   );
