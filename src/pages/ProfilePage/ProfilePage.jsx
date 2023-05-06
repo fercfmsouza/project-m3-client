@@ -30,12 +30,11 @@ function ProfilePage() {
 
   return (
     <div>
-      {
-        user && user.posts.length > 0 &&
+      {user &&
+        user.posts.length > 0 &&
         user.posts.map((post) => {
-          return <div>{post.description}</div>
-        })
-      }
+          return <div key={post._id}>{post.description}</div>;
+        })}
       <Link to='/newpost'>New Post</Link>
     </div>
   );

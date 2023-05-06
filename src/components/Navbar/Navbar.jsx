@@ -28,6 +28,7 @@ function Navbar() {
         </span>
 
         <button onClick={logOutUser}>Logout</button>
+
         {isLoggedIn && (
           <>
             <div className='menu-icon' onClick={handleClick}>

@@ -1,19 +1,27 @@
 import React from 'react';
 import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { api } from '../../api';
 
 import { AuthContext } from '../../context/auth.context';
 import './PostPage.css';
 import { useGoBack } from '../../hooks/useGoBack';
 
-
 const PostPage = () => {
   const { state } = useLocation();
   const { user } = useContext(AuthContext);
-  const { goBack } = useGoBack()
-  
-  console.log('user', user);
-  console.log('state', state);
+  const navigate = useNavigate();
+  const { goBack } = useGoBack();
+
+  async function handleDelete() {
+    try {
+      const response = await api.delete(`/posts/${state._id}`);
+
+      if (response.status === 200) navigate(`/profile/${user._id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className='PostPage'>
@@ -22,9 +30,9 @@ const PostPage = () => {
       <h1>{state.owner.username}</h1>
       <p>{state.description}</p>
 
-      <div onClick={goBack}>
-        Back
-      </div>
+      <button onClick={handleDelete}>Delete</button>
+
+      <div onClick={goBack}>Back</div>
     </div>
   );
 };
