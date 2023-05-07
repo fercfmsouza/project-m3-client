@@ -29,8 +29,9 @@ const NewPostPage = () => {
       });
 
       if (response.status === 201) {
+        const post = response.data;
         setIsLoading(false);
-        navigate('/post', { state: response.data });
+        navigate(`/post/${post._id}`);
       }
     } catch (error) {
       setIsLoading(false);

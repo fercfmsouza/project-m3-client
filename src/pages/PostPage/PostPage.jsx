@@ -1,27 +1,28 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../../api';
 
 import { AuthContext } from '../../context/auth.context';
 import './PostPage.css';
 import { useGoBack } from '../../hooks/useGoBack';
+import Input from '../../components/Forms/Input';
 
 const PostPage = () => {
-  const { state } = useLocation();
+  const { id } = useParams();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { goBack } = useGoBack();
-  const [ post, setPost ] = useState();
-  const [ description, setDescription ] = useState()
+  const [post, setPost] = useState();
+  const [isEditionEnabled, setIsEditionEnabled] = useState(false);
 
   const isPostOwner = user && post && user._id === post.owner._id;
 
   useEffect(() => {
-    getPost(state._id);
+    getPost();
   }, []);
 
-  async function getPost(id) {
+  async function getPost() {
     const response = await api.get(`/posts/${id}`);
 
     setPost(response.data);
@@ -36,23 +37,25 @@ const PostPage = () => {
     }
   }
 
-  async function handleEdit(e) {
+  function toggleEditionMode() {
+    setIsEditionEnabled((previousState) => !previousState);
+  }
+
+  async function handleEdition(e) {
     e.preventDefault();
 
-    const newDescription = e.target.description
+    const description = e.target.description.value;
+
     try {
-      const response = await api.put(`/posts/${post._id}`);
+      const response = await api.put(`/posts/${post._id}`, { description });
 
       if (response.status === 200) {
-        setDescription(newDescription)
+        getPost();
+        setIsEditionEnabled(false);
       }
     } catch (error) {
       console.error(error);
     }
-  }
-
-  const enableEdit = () => {
-
   }
 
   async function handleSubmit(e) {
@@ -63,7 +66,7 @@ const PostPage = () => {
       const response = await api.post('/comments', { text, postId: post._id });
 
       if (response.status === 201) {
-        getPost(post._id);
+        getPost();
         e.target.reset();
       }
     } catch (error) {
@@ -73,13 +76,30 @@ const PostPage = () => {
 
   if (!post) return null;
 
-  console.log('isPostOwner', isPostOwner);
-
   return (
     <div className='PostPage'>
       <h1>{post.owner.username}</h1>
 
       <img src={post.image} alt='random_image' />
+
+      {!isEditionEnabled && <h1>{post.description}</h1>}
+      {isEditionEnabled && (
+        <form onSubmit={handleEdition} style={{ display: 'flex' }}>
+          <input
+            type='text'
+            name='description'
+            placeholder={post.description}
+          />
+          <button>Save Edition</button>
+        </form>
+      )}
+
+      {isPostOwner && (
+        <>
+          <button onClick={handleDelete}>Delete</button>
+          <button onClick={toggleEditionMode}>Edit</button>
+        </>
+      )}
 
       {!!post.comments.length &&
         post.comments.map((comment) => {
@@ -91,23 +111,14 @@ const PostPage = () => {
           );
         })}
 
-      {isPostOwner && (
-        <>
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={handleEdit}>Edit</button>
-        </>
-      )}
-
-      <form onSubmit={handleEdit}>
-        <input onClick={enableEdit}>{post.description}</input>
+      <form onSubmit={handleSubmit}>
+        <Input type='text' name='comment' placeholder='Comments...' />
+        <button>
+          <img src='../../../comment.svg' alt='button-comment' />
+        </button>
       </form>
 
-      <form onSubmit={handleSubmit} style={{ border: '1px solid grey' }}>
-        <label htmlFor='comment'>Create a comment</label>
-        <input type='text' name='comment' />
-      </form>
-
-      <div onClick={goBack}>Back</div>
+      <button onClick={goBack}>Back</button>
     </div>
   );
 };

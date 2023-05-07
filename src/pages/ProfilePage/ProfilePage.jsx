@@ -8,7 +8,7 @@ import { useGoBack } from '../../hooks/useGoBack';
 function ProfilePage() {
   const { id } = useParams();
   const [user, setUser] = useState();
-  const { goBack } = useGoBack()
+  const { goBack } = useGoBack();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -16,7 +16,6 @@ function ProfilePage() {
         const response = await api.get(`/users/${id}`);
 
         setUser(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -25,25 +24,23 @@ function ProfilePage() {
     fetchUser();
   }, []);
 
+  if (!user) return null;
+
   return (
     <div>
-      {user &&
-        user.posts.length > 0 &&
+      <h1>{user.username}</h1>
+
+      {user.posts.length > 0 &&
         user.posts.map((post) => {
           return (
-            <Link key={post._id} to='/post' state={post}>
-              <img src={post.image} key={post._id} alt={post.description}/>
+            <Link key={post._id} to={`/post/${post._id}`}>
+              <img src={post.image} key={post._id} alt={post.description} />
             </Link>
-          )
-        })
-      }
-      {
-        user &&
-        <>
-          <Link to='/newpost'>New Post</Link>
-          <div onClick={goBack}>Back</div>
-        </>
-      }
+          );
+        })}
+
+      <Link to='/newpost'>New Post</Link>
+      <div onClick={goBack}>Back</div>
     </div>
   );
 }

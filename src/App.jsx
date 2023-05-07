@@ -30,12 +30,7 @@ function App() {
             }
           />
 
-          <Route
-            path='/post'
-            element={
-                <PostPage />
-            }
-          />
+          <Route path='/post/:id' element={<PostPage />} />
 
           <Route
             path='/newpost'
