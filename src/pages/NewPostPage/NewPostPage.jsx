@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NewPostPage.css';
 import { api } from '../../api';
 import Input from '../../components/Forms/Input';
 import Button from '../../components/Forms/Button';
+import Loading from '../../components/Loading/Loading';
 import { useGoBack } from '../../hooks/useGoBack';
 
 const NewPostPage = () => {
   const navigate = useNavigate();
-  const { goBack } = useGoBack()
+  const { goBack } = useGoBack();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const description = e.target.description.value;
     const image = e.target.image.files[0];
@@ -20,12 +23,22 @@ const NewPostPage = () => {
     formData.append('image', image);
     formData.append('description', description);
 
-    const response = await api.post('/posts', formData, {
-      headers: { 'Content-Type': 'multipart/formdata' },
-    });
+    try {
+      const response = await api.post('/posts', formData, {
+        headers: { 'Content-Type': 'multipart/formdata' },
+      });
 
-    if (response.status === 201) navigate('/post', { state: response.data });
+      if (response.status === 201) {
+        setIsLoading(false);
+        navigate('/post', { state: response.data });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>
@@ -34,6 +47,7 @@ const NewPostPage = () => {
         <Input label='Description' name='description' />
 
         <Input type='file' name='image' />
+
         <Button>Create Post</Button>
         <div onClick={goBack}>Back</div>
       </form>
