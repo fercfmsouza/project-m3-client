@@ -12,7 +12,8 @@ const PostPage = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { goBack } = useGoBack();
-  const [post, setPost] = useState();
+  const [ post, setPost ] = useState();
+  const [ description, setDescription ] = useState()
 
   const isPostOwner = user && post && user._id === post.owner._id;
 
@@ -35,15 +36,23 @@ const PostPage = () => {
     }
   }
 
-  async function handleEdit() {
+  async function handleEdit(e) {
+    e.preventDefault();
+
+    const newDescription = e.target.description
     try {
       const response = await api.put(`/posts/${post._id}`);
 
       if (response.status === 200) {
+        setDescription(newDescription)
       }
     } catch (error) {
       console.error(error);
     }
+  }
+
+  const enableEdit = () => {
+
   }
 
   async function handleSubmit(e) {
@@ -89,7 +98,9 @@ const PostPage = () => {
         </>
       )}
 
-      <p>{post.description}</p>
+      <form onSubmit={handleEdit}>
+        <input onClick={enableEdit}>{post.description}</input>
+      </form>
 
       <form onSubmit={handleSubmit} style={{ border: '1px solid grey' }}>
         <label htmlFor='comment'>Create a comment</label>
