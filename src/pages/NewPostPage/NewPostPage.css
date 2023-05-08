@@ -1,0 +1,32 @@
+.NewPostPage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+.NewPostPage::after {
+  display: block;
+  content: '';
+  background: url('../../../public/login-photo.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.forms {
+  max-width: 30rem;
+  padding: 1rem;
+}
+
+@media (max-width: 40rem) {
+  .NewPostPage {
+    grid-template-columns: 1fr;
+  }
+
+  .NewPostPage::after {
+    display: none;
+  }
+
+  .forms {
+    max-width: 100%;
+  }
+}

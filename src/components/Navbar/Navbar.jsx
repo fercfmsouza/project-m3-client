@@ -19,6 +19,16 @@ function Navbar() {
           <img src='../../../logo.svg' alt='pets-logo' />
         </Link>
 
+        {/* <span>
+          {user && (
+            <>
+              <Link to={`/profile/${user._id}`}>
+                @{user.username.toLowerCase()}
+              </Link>
+            </>
+          )}
+        </span> */}
+
         {isLoggedIn && (
           <>
             <div className='menu-icon' onClick={handleClick}>
@@ -36,11 +46,13 @@ function Navbar() {
                 @{user.username.toLowerCase()}
               </Link>
             </li>
-            <li className='nav-item'>
+
+            {/* <li className='nav-item'>
               <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 <button onClick={logOutUser}>Log out</button>
               </Link>
-            </li>
+            </li> */}
+
             <Link to='/' className='nav-links' onClick={closeMobileMenu} />
           </>
         )}

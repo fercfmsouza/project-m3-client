@@ -1,4 +1,5 @@
 import './LoginPage.css';
+import '../../App.css';
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
@@ -47,32 +48,43 @@ function LoginPage() {
   };
 
   return (
-    <div className='LoginPage'>
-      <h1>Login</h1>
+    <section className='LoginPage animeLeft'>
+      <div className='forms'>
+        <h1 className='title'>Login</h1>
 
-      <form onSubmit={handleLoginSubmit}>
-        <Input
-          label='E-mail'
-          type='email'
-          name='email'
-          value={email}
-          onChange={handleEmail}
-        />
-        <Input
-          label='Password'
-          type='password'
-          name='password'
-          value={password}
-          onChange={handlePassword}
-        />
-        <Button type='submit'>Login</Button>
-      </form>
+        <form onSubmit={handleLoginSubmit}>
+          <Input
+            label='E-mail'
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleEmail}
+          />
+          <Input
+            label='Password'
+            type='password'
+            name='password'
+            value={password}
+            onChange={handlePassword}
+          />
+          <Button type='submit'>Login</Button>
+        </form>
 
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
+        {errorMessage && <p className='error-message'>{errorMessage}</p>}
 
-      <p>Don't have an account yet? Create account.</p>
-      <Link to={'/signup'}>Create</Link>
-    </div>
+        <Link to={'/lostPassword'} className='lost-password'>
+          Lost your password?
+        </Link>
+
+        <div className='create-account'>
+          <h2 className='subtitle'>Create account</h2>
+          <p>Don't have an account yet? Create account.</p>
+          <Link to={'/signup'} className='button'>
+            Create
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 

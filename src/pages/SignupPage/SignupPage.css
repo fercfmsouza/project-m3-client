@@ -1,3 +1,32 @@
-.SignupPage h1 {
-  font-family: 'Source Serif Pro';
+.SignupPage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+.SignupPage::before {
+  display: block;
+  content: '';
+  background: url('../../../public/login-photo.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.forms {
+  max-width: 30rem;
+  padding: 1rem;
+}
+
+@media (max-width: 40rem) {
+  .SignupPage {
+    grid-template-columns: 1fr;
+  }
+
+  .SignupPage::before {
+    display: none;
+  }
+
+  .forms {
+    max-width: 100%;
+  }
 }

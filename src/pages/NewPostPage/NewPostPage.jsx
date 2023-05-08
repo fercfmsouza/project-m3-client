@@ -42,17 +42,22 @@ const NewPostPage = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div>
-      <h1>New Post</h1>
-      <form onSubmit={handleSubmit}>
-        <Input label='Description' name='description' />
+    <section className='NewPostPage'>
+      <div className='forms'>
+        <h1 className='title'>New Post</h1>
 
-        <Input type='file' name='image' />
+        <form onSubmit={handleSubmit}>
+          <Input label='Description' name='description' />
 
-        <Button>Create Post</Button>
-        <div onClick={goBack}>Back</div>
-      </form>
-    </div>
+          <Input type='file' name='image' />
+
+          <Button>Create Post</Button>
+        </form>
+        <button onClick={goBack} className='back-button'>
+          Back
+        </button>
+      </div>
+    </section>
   );
 };
 

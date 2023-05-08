@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
 import './ProfilePage.css';
 
 import { api } from '../../api';
 import { useGoBack } from '../../hooks/useGoBack';
 
 function ProfilePage() {
+  const { logOutUser } = useContext(AuthContext);
+
   const { id } = useParams();
   const [user, setUser] = useState();
   const { goBack } = useGoBack();
@@ -27,8 +30,24 @@ function ProfilePage() {
   if (!user) return null;
 
   return (
-    <div>
-      <h1>{user.username}</h1>
+    <section className='container'>
+      <div className='header-newpost'>
+        <h1 className='title'>{user.username}</h1>
+
+        <div className='wrapper-links'>
+          <Link to='/newpost'>
+            <img src='../../../plus.svg' alt='plus-sign' />
+          </Link>
+
+          <Link to='/settings'>
+            <img src='../../../settings.svg' alt='settings-sign' />
+          </Link>
+
+          <button onClick={logOutUser} className='btn-logout'>
+            <img src='../../../logout.svg' alt='settings-sign' />
+          </button>
+        </div>
+      </div>
 
       {user.posts.length > 0 &&
         user.posts.map((post) => {
@@ -39,9 +58,10 @@ function ProfilePage() {
           );
         })}
 
-      <Link to='/newpost'>New Post</Link>
-      <div onClick={goBack}>Back</div>
-    </div>
+      <button onClick={goBack} className='back-button'>
+        Back
+      </button>
+    </section>
   );
 }
 

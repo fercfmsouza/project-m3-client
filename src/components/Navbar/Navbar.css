@@ -12,11 +12,16 @@
   justify-content: space-between;
   align-items: center;
   height: 4rem;
+  padding: 0 10rem;
 }
 
 .links {
   display: flex;
   gap: 10px;
+}
+
+.links a:hover {
+  color: #f1b252;
 }
 
 .logo {
@@ -40,4 +45,10 @@
 
 .menu-icon {
   width: 5vw;
+}
+
+@media (max-width: 40rem) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
 }

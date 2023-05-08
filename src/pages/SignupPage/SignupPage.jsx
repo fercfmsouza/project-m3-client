@@ -1,4 +1,5 @@
 import './SignupPage.css';
+import '../../App.css';
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.service';
@@ -42,39 +43,45 @@ function SignupPage() {
   };
 
   return (
-    <div className='SignupPage'>
-      <h1>Create account</h1>
+    <section className='SignupPage animeLeft'>
+      <div className='forms'>
+        <h1 className='title'>Create account</h1>
 
-      <form onSubmit={handleSignupSubmit}>
-        <Input
-          label='Username'
-          type='text'
-          name='username'
-          value={username}
-          onChange={handleUsername}
-        />
-        <Input
-          label='E-mail'
-          type='email'
-          name='email'
-          value={email}
-          onChange={handleEmail}
-        />
-        <Input
-          label='Password'
-          type='password'
-          name='password'
-          value={password}
-          onChange={handlePassword}
-        />
-        <Button type='submit'>Create</Button>
-      </form>
+        <form onSubmit={handleSignupSubmit}>
+          <Input
+            label='Username'
+            type='text'
+            name='username'
+            value={username}
+            onChange={handleUsername}
+          />
+          <Input
+            label='E-mail'
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleEmail}
+          />
+          <Input
+            label='Password'
+            type='password'
+            name='password'
+            value={password}
+            onChange={handlePassword}
+          />
+          <Button type='submit'>Create</Button>
+        </form>
 
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
+        {errorMessage && <p className='error-message'>{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to={'/login'}> Login</Link>
-    </div>
+        <div className='create-account'>
+          <p>Already have account?</p>
+          <Link to={'/login'} className='button'>
+            Login
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 

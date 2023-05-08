@@ -1,0 +1,38 @@
+.wrapper-links {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+
+.wrapper-links a,
+.wrapper-links button {
+  cursor: pointer;
+  background: #eee;
+  border-radius: 0.2rem;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: 0.1s;
+}
+
+.wrapper-links a:hover,
+.wrapper-links a:focus,
+.wrapper-links button:hover,
+.wrapper-links button:focus {
+  background-color: white;
+  box-shadow: 0 0 0 3px #fea;
+  border-color: #fb1;
+  outline: none;
+}
+
+.header-newpost {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  position: relative;
+}
