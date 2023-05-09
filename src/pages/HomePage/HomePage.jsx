@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-import './HomePage.css';
 import { api } from '../../api';
-import PostPage from '../PostPage/PostPage';
+import './HomePage.css';
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -23,10 +21,10 @@ function HomePage() {
   }, []);
 
   return (
-    <div className='bg'>
-      <h1>Home page</h1>
+    <section className='container mainContainer'>
+      {/* feedModal */}
 
-      <ul className='feed'>
+      <ul className='feed animeLeft'>
         {posts &&
           posts.length > 0 &&
           posts.map((post) => {
@@ -40,7 +38,7 @@ function HomePage() {
             );
           })}
       </ul>
-    </div>
+    </section>
   );
 }
 

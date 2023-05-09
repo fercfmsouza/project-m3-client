@@ -30,7 +30,7 @@ function ProfilePage() {
   if (!user) return null;
 
   return (
-    <section className='container'>
+    <section className='container animeLeft'>
       <div className='header-newpost'>
         <h1 className='title'>{user.username}</h1>
 

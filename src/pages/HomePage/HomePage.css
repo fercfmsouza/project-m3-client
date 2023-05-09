@@ -22,21 +22,25 @@
   grid-area: 1/1;
 }
 
+.feed-img span {
+  grid-area: 1/1;
+}
+
 .views {
   background: rgba(0, 0, 0, 0.3);
-  grid-area: 1/1;
   color: white;
   font-size: 1rem;
   text-align: center;
   align-items: center;
   justify-content: center;
+  grid-area: 1/1;
   display: none;
 }
 
 .views::before {
-  content: '';
   width: 16px;
   height: 10px;
+  content: '';
   display: inline-block;
   margin-right: 0.25rem;
   background: url('../../../public/views.svg') no-repeat;
