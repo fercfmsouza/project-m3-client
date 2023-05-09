@@ -14,6 +14,7 @@ const PostPage = () => {
   const navigate = useNavigate();
   const { goBack } = useGoBack();
   const [post, setPost] = useState();
+  const [views, setViews] = useState(0);
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
 
   const isPostOwner = user && post && user._id === post.owner._id;
@@ -25,7 +26,9 @@ const PostPage = () => {
   async function getPost() {
     const response = await api.get(`/posts/${id}`);
 
+    
     setPost(response.data);
+    setViews(response.data.views);
   }
 
   async function handleDelete() {
@@ -81,6 +84,8 @@ const PostPage = () => {
       <h1>{post.owner.username}</h1>
 
       <img src={post.image} alt='random_image' />
+
+      <p>Views: {views}</p>
 
       {!isEditionEnabled && <h1>{post.description}</h1>}
       {isEditionEnabled && (
