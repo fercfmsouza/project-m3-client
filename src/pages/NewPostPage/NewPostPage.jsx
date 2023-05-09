@@ -11,6 +11,7 @@ const NewPostPage = () => {
   const navigate = useNavigate();
   const { goBack } = useGoBack();
   const [isLoading, setIsLoading] = useState(false);
+  const [image, setImage] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,24 +40,47 @@ const NewPostPage = () => {
     }
   };
 
+  function handleImgChange({ target }) {
+    setImage({
+      preview: URL.createObjectURL(target.files[0]),
+      raw: target.files[0],
+    });
+  }
+
   if (isLoading) return <Loading />;
 
   return (
-    <section className='NewPostPage'>
-      <div className='forms'>
+    <section className='container animeLeft '>
+      <div>
         <h1 className='title'>New Post</h1>
+      </div>
 
+      <div className='NewPostPage'>
         <form onSubmit={handleSubmit}>
           <Input label='Description' name='description' />
-
-          <Input type='file' name='image' />
-
+          {/* <Input type='file' name='image' /> */}
+          <input
+            className='file'
+            type='file'
+            name='image'
+            onChange={handleImgChange}
+          />
           <Button>Create Post</Button>
         </form>
-        <button onClick={goBack} className='back-button'>
-          Back
-        </button>
+
+        <div>
+          {image.preview && (
+            <div
+              className='preview'
+              style={{ backgroundImage: `url("${image.preview}")` }}
+            ></div>
+          )}
+        </div>
       </div>
+
+      <button onClick={goBack} className='back-button'>
+        Back
+      </button>
     </section>
   );
 };
