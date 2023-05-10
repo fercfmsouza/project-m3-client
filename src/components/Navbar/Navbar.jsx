@@ -19,41 +19,46 @@ function Navbar() {
           <img src='../../../logo.svg' alt='pets-logo' />
         </Link>
 
-        {/* <span>
-          {user && (
-            <>
-              <Link to={`/profile/${user._id}`}>
-                @{user.username.toLowerCase()}
-              </Link>
-            </>
-          )}
-        </span> */}
-
         {isLoggedIn && (
           <>
             <div className='menu-icon' onClick={handleClick}>
-              {click && <img src='../../../close-icon.png' alt='close menu' />}
+            {click && <img src='../../../close-icon.png' alt='close menu' />}
               {!click && <img src='../../../menu-icon.png' alt='bar menu' />}
+              {/*<div className={click ? 'fas fa-times' : 'fas fa-bars'}>
+                <h3>@{user.username.toLowerCase()}</h3>
+                <img src='../../../login.svg' alt='login icon' />
+        </div>*/}
             </div>
 
-            <ul className={click ? 'nav-menu active' : 'nav-menu'}></ul>
-            <li className='nav-item'>
-              <Link
-                to={`/profile/${user._id}`}
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                @{user.username.toLowerCase()}
-              </Link>
-            </li>
-
-            {/* <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                <button onClick={logOutUser}>Log out</button>
-              </Link>
-            </li> */}
-
-            <Link to='/' className='nav-links' onClick={closeMobileMenu} />
+            <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+              <li className='nav-item'>
+                <Link
+                  to={`/profile/${user._id}`}
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >
+                  My profile
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  to={`/settings`}
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >
+                  Settings
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  to={'/'}
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >
+                  <p onClick={logOutUser}>Log out</p>
+                </Link>
+              </li>
+            </ul> 
           </>
         )}
 
