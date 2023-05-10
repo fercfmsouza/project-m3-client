@@ -48,15 +48,28 @@ function ProfilePage() {
           </button>
         </div>
       </div>
-
-      {user.posts.length > 0 &&
-        user.posts.map((post) => {
-          return (
-            <Link key={post._id} to={`/post/${post._id}`}>
-              <img src={post.image} key={post._id} alt={post.description} />
-            </Link>
-          );
-        })}
+      <ul className='feed animeLeft'>
+        {user.posts.length > 0 &&
+          user.posts.map((post) => {
+            return (
+              <li key={post._id} className='feed-item'>
+                <Link
+                  className='feed-link'
+                  key={post._id}
+                  to={`/post/${post._id}`}
+                >
+                  <img
+                    className='feed-img'
+                    src={post.image}
+                    key={post._id}
+                    alt={post.description}
+                  />
+                  <span className='feed-views'>views</span>
+                </Link>
+              </li>
+            );
+          })}
+      </ul>
 
       <button onClick={goBack} className='back-button'>
         Back

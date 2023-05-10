@@ -105,16 +105,16 @@ input {
   font-family: var(--type-first);
   cursor: pointer;
   border: none;
-  border-radius: 0.2rem;
-  background: #ddd;
-  color: #717171;
-  padding: 0.1rem 0;
+  border-radius: 0.25rem;
+  background-color: #eee;
+  color: #a5a5a5;
+  padding: 0.25rem 1rem;
   box-sizing: border-box;
   transition: 0.1s;
   min-width: 8rem;
+  margin-bottom: 1.5rem;
 }
 
 .back-button:hover {
-  background: #717171;
-  color: #ddd;
+  border: 1px solid #a5a5a5;
 }
