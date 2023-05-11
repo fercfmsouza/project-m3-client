@@ -39,7 +39,7 @@ function ProfilePage() {
             <img src='../../../plus.svg' alt='plus-sign' />
           </Link>
 
-          <Link to='/settings'>
+          <Link to={`/users/${id}/settings`}>
             <img src='../../../settings.svg' alt='settings-sign' />
           </Link>
 
