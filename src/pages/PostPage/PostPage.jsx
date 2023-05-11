@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/auth.context';
 import './PostPage.css';
 import { useGoBack } from '../../hooks/useGoBack';
 import Input from '../../components/Forms/Input';
+import Button from '../../components/Forms/Button';
 
 const PostPage = () => {
   const { id } = useParams();
@@ -95,45 +96,57 @@ const PostPage = () => {
         <img className='photo' src={post.image} alt='random_image' />
         
         <div className='post-details'>
-        {isPostOwner && (
-          <div className='edit-buttons'>
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={toggleEditionMode}>Edit</button>
-          </div>
-        )}
-        <div className='views-count'>Views: {views}</div>
-
-        <h1>{post.owner.username}</h1>
-
-          {!isEditionEnabled && <h1>{post.description}</h1>}
-          {isEditionEnabled && (
-            <form onSubmit={handleEdition} style={{ display: 'flex' }}>
-              <input
-                type='text'
-                name='description'
-                placeholder={post.description}
-              />
-              <button>Save Edition</button>
-            </form>
-          )}
-
-
-          {!!post.comments.length &&
-            post.comments.map((comment) => {
-              return (
-                <div key={comment._id}>
-                  <p>author: {comment.owner.username}</p>
-                  <p>{comment.text}</p>
+          <div>
+            <div className='post-custom'>
+              {isPostOwner && (
+                <div className='edit-buttons'>
+                  <button className='delete' onClick={handleDelete}>Delete</button>
+                  <button onClick={toggleEditionMode}>Edit</button>
                 </div>
-              );
-            })}
+              )}
+              <p>Views: {views}</p>
+            </div>
 
-          <form onSubmit={handleSubmit}>
-            <Input type='text' name='comment' placeholder='Comments...' />
-            <button>
-              <img src='../../../comment.svg' alt='button-comment' />
-            </button>
-          </form>
+            <div className='post-form'>
+              {!isEditionEnabled && <h2>{post.owner.username.toLowerCase()} <span>{post.description}</span></h2>}
+              {isEditionEnabled && (
+                <form onSubmit={handleEdition} style={{ display: 'flex' }}>
+                  <input
+                    type='text'
+                    name='description'
+                    placeholder={post.description}
+                  />
+                  <Button>Save Edition</Button>
+                </form>
+              )}
+
+                <p>{post.createdAt.toString()}</p>
+            </div>
+          </div>
+
+          <div className='post-comments'>
+            {
+              !!post.comments.length &&
+              post.comments.map((comment) => {
+                return (
+                  <div key={comment._id}>
+                    <p>author: {comment.owner.username}</p>
+                    <p>{comment.text}</p>
+                  </div>
+                );
+              })
+            }
+
+            <div className='post-newcomment'>
+              <form onSubmit={handleSubmit}>
+                <Input type='text' name='comment' placeholder='Comments...' />
+                <Button>
+                  <img src='../../../comment.svg' alt='button-comment' />
+                </Button>
+              </form>
+            </div>
+
+          </div>
 
         </div>
       </div>
