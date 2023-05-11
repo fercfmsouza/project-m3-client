@@ -29,11 +29,11 @@ function HomePage() {
           posts.length > 0 &&
           posts.map((post) => {
             return (
-              <li key={post._id} className='feed-img'>
-                <Link to={`/post/${post._id}`}>
-                  <img src={post.image} alt='post' />
+              <li key={post._id} className='feed-item'>
+                <Link className='feed-link' to={`/post/${post._id}`}>
+                  <img className='feed-img' src={post.image} alt='post' />
+                  <span className='feed-views'>views</span>
                 </Link>
-                <span className='views'>views</span>
               </li>
             );
           })}

@@ -22,7 +22,7 @@ function Navbar() {
         {isLoggedIn && (
           <>
             <div className='menu-icon' onClick={handleClick}>
-            {click && <img src='../../../close-icon.png' alt='close menu' />}
+              {click && <img src='../../../close-icon.png' alt='close menu' />}
               {!click && <img src='../../../menu-icon.png' alt='bar menu' />}
               {/*<div className={click ? 'fas fa-times' : 'fas fa-bars'}>
                 <h3>@{user.username.toLowerCase()}</h3>
@@ -50,15 +50,11 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link
-                  to={'/'}
-                  className='nav-links'
-                  onClick={closeMobileMenu}
-                >
+                <Link to={'/'} className='nav-links' onClick={closeMobileMenu}>
                   <p onClick={logOutUser}>Log out</p>
                 </Link>
               </li>
-            </ul> 
+            </ul>
           </>
         )}
 
