@@ -1,137 +1,143 @@
 .PostPage {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* min-height: 100vh; */
-    margin: 2rem 0;
-    gap: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* min-height: 100vh; */
+  margin: 2rem 0;
+  gap: 4rem;
 }
 
 h1 {
-    font-family: var(--type-second);
+  font-family: var(--type-second);
 }
 
 div span {
-    font-weight: 100;
+  font-weight: 100;
 }
 
 .post-intro {
-    display: flex;
-    justify-content: space-between;
-    margin: 2rem 10rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 10rem;
 }
 
 .buttons {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
 .back {
-    height: 2.5rem;
+  height: 2.5rem;
 }
 
 .back:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .photo {
-    margin-left: 10rem;
-    margin-right: 0;
-    max-width: 564px;
-    max-height: 908px;
+  margin-left: 10rem;
+  margin-right: 0;
+  max-width: 564px;
+  max-height: 908px;
 }
 
 .edit-buttons {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 .post-custom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 11rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 11rem;
 }
 
 .edit-buttons button {
-    background: #eee;
-    border-radius: 0.2rem;
-    color:#616161;
-    height: 2rem;
-    width: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid transparent;
-    transition: 0.1s;
+  background: #eee;
+  border-radius: 0.2rem;
+  color: #616161;
+  height: 2rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: 0.1s;
 }
 
 .post-form {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 .post-form p {
-    color: #616161;
+  color: #616161;
 }
 
 .post-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .post-details {
-    margin-left: -3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  margin-left: -3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .post-details span {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .post-comments {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-content: center; 
-    margin-bottom: 0;  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: center;
+  margin-bottom: 0;
 }
 
 .wrapper-input {
-    margin-bottom: 0;
-    margin-top: 1rem;
+  margin-bottom: 0;
+  margin-top: 1rem;
 }
 
 .wrapper-input label {
-    display: none;
+  display: none;
 }
 
 .post-newcomment {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .post-newcomment form {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    margin-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  margin-bottom: 0;
 }
 
 .post-newcomment button.button {
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .post-newcomment input {
-    width: 27vw;
+  width: 27vw;
+}
+
+.post-newcomment img:hover {
+  filter: invert(86%) sepia(4%) saturate(7018%) hue-rotate(329deg)
+    brightness(98%) contrast(92%);
+  cursor: pointer;
 }
 
 /*
@@ -147,31 +153,29 @@ div span {
 
 .edit-buttons button:hover,
 .edit-buttons button:focus {
-    cursor: pointer;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px #fea;
-    outline: none;
-    border-color: #fb1;
-    color:#252525
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px #fea;
+  outline: none;
+  border-color: #fb1;
+  color: #252525;
 }
 
 @media screen and (max-width: 960px) {
-    
-    .PostPage {
-      grid-template-columns: 1fr;
-    }
+  .PostPage {
+    grid-template-columns: 1fr;
+  }
 
-    .photo {
-        margin: 0 2rem;
-        justify-self: center;
-    }
+  .photo {
+    margin: 0 2rem;
+    justify-self: center;
+  }
 
-    .post-intro {
-        margin: 1.5rem 1rem;
-    }
+  .post-intro {
+    margin: 1.5rem 1rem;
+  }
 
-    .post-details {
-        margin-left: 1rem;
-    }
-
+  .post-details {
+    margin-left: 1rem;
+  }
 }

@@ -27,7 +27,6 @@ const PostPage = () => {
   async function getPost() {
     const response = await api.get(`/posts/${id}`);
 
-    
     setPost(response.data);
     setViews(response.data.views);
   }
@@ -83,24 +82,31 @@ const PostPage = () => {
   return (
     <>
       <div className='post-intro'>
-        <h1>{post.owner.username}</h1>
+        <h1 className='title'>{post.owner.username}</h1>
         <div className='buttons'>
-          <img className='back' onClick={goBack} src='../../../back-arrow.png' alt='back-arrow' />
+          <img
+            className='back'
+            onClick={goBack}
+            src='../../../back-arrow.png'
+            alt='back-arrow'
+          />
           <Link to='/newpost'>
-              <img src='../../../plus.svg' alt='plus-sign' />
+            <img src='../../../plus.svg' alt='plus-sign' />
           </Link>
         </div>
       </div>
 
       <div className='PostPage'>
         <img className='photo' src={post.image} alt='random_image' />
-        
+
         <div className='post-details'>
           <div>
             <div className='post-custom'>
               {isPostOwner && (
                 <div className='edit-buttons'>
-                  <button className='delete' onClick={handleDelete}>Delete</button>
+                  <button className='delete' onClick={handleDelete}>
+                    Delete
+                  </button>
                   <button onClick={toggleEditionMode}>Edit</button>
                 </div>
               )}
@@ -108,7 +114,12 @@ const PostPage = () => {
             </div>
 
             <div className='post-form'>
-              {!isEditionEnabled && <h2>{post.owner.username.toLowerCase()} <span>{post.description}</span></h2>}
+              {!isEditionEnabled && (
+                <h2>
+                  {post.owner.username.toLowerCase()}{' '}
+                  <span>{post.description}</span>
+                </h2>
+              )}
               {isEditionEnabled && (
                 <form onSubmit={handleEdition} style={{ display: 'flex' }}>
                   <input
@@ -120,13 +131,12 @@ const PostPage = () => {
                 </form>
               )}
 
-                <p>{post.createdAt.toString()}</p>
+              <p>{post.createdAt.toString()}</p>
             </div>
           </div>
 
           <div className='post-comments'>
-            {
-              !!post.comments.length &&
+            {!!post.comments.length &&
               post.comments.map((comment) => {
                 return (
                   <div key={comment._id}>
@@ -134,20 +144,15 @@ const PostPage = () => {
                     <p>{comment.text}</p>
                   </div>
                 );
-              })
-            }
+              })}
 
             <div className='post-newcomment'>
               <form onSubmit={handleSubmit}>
                 <Input type='text' name='comment' placeholder='Comments...' />
-                <Button>
-                  <img src='../../../comment.svg' alt='button-comment' />
-                </Button>
+                <img src='../../../comment.svg' alt='button-comment' />
               </form>
             </div>
-
           </div>
-
         </div>
       </div>
     </>
