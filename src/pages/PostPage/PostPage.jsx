@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { api } from '../../api';
 
 import { AuthContext } from '../../context/auth.context';
@@ -80,51 +80,64 @@ const PostPage = () => {
   if (!post) return null;
 
   return (
-    <div className='PostPage'>
-      <h1>{post.owner.username}</h1>
+    <>
+      <div className='post-intro'>
+        <h1>{post.owner.username}</h1>
+        <div className='buttons'>
+          <img className='back' onClick={goBack} src='../../../back-arrow.png' alt='back-arrow' />
+          <Link to='/newpost'>
+              <img src='../../../plus.svg' alt='plus-sign' />
+          </Link>
+        </div>
+      </div>
 
-      <img src={post.image} alt='random_image' />
+      <div className='PostPage'>
+        <img className='photo' src={post.image} alt='random_image' />
+        
+        <div className='post-details'>
+        {isPostOwner && (
+          <div className='edit-buttons'>
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={toggleEditionMode}>Edit</button>
+          </div>
+        )}
+        <div className='views-count'>Views: {views}</div>
 
-      <p>Views: {views}</p>
+        <h1>{post.owner.username}</h1>
 
-      {!isEditionEnabled && <h1>{post.description}</h1>}
-      {isEditionEnabled && (
-        <form onSubmit={handleEdition} style={{ display: 'flex' }}>
-          <input
-            type='text'
-            name='description'
-            placeholder={post.description}
-          />
-          <button>Save Edition</button>
-        </form>
-      )}
+          {!isEditionEnabled && <h1>{post.description}</h1>}
+          {isEditionEnabled && (
+            <form onSubmit={handleEdition} style={{ display: 'flex' }}>
+              <input
+                type='text'
+                name='description'
+                placeholder={post.description}
+              />
+              <button>Save Edition</button>
+            </form>
+          )}
 
-      {isPostOwner && (
-        <>
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={toggleEditionMode}>Edit</button>
-        </>
-      )}
 
-      {!!post.comments.length &&
-        post.comments.map((comment) => {
-          return (
-            <div key={comment._id}>
-              <p>author: {comment.owner.username}</p>
-              <p>{comment.text}</p>
-            </div>
-          );
-        })}
+          {!!post.comments.length &&
+            post.comments.map((comment) => {
+              return (
+                <div key={comment._id}>
+                  <p>author: {comment.owner.username}</p>
+                  <p>{comment.text}</p>
+                </div>
+              );
+            })}
 
-      <form onSubmit={handleSubmit}>
-        <Input type='text' name='comment' placeholder='Comments...' />
-        <button>
-          <img src='../../../comment.svg' alt='button-comment' />
-        </button>
-      </form>
+          <form onSubmit={handleSubmit}>
+            <Input type='text' name='comment' placeholder='Comments...' />
+            <button>
+              <img src='../../../comment.svg' alt='button-comment' />
+            </button>
+          </form>
 
-      <button onClick={goBack}>Back</button>
-    </div>
+        </div>
+      </div>
+    </>
   );
 };
 

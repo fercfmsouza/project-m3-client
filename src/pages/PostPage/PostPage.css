@@ -1,0 +1,51 @@
+.PostPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* min-height: 100vh; */
+    margin: 2rem 0;
+    gap: 4rem;
+}
+
+.post-intro {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 10rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.back {
+    height: 2.5rem;
+}
+
+.back:hover {
+    cursor: pointer;
+}
+
+.photo {
+    margin: 0 10rem;
+}
+
+.edit-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.views-count {
+    position: relative;
+    right: 0;
+}
+
+.edit-buttons button:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 960px) {
+    .PostPage {
+      grid-template-columns: 1fr;
+    }
+  }
