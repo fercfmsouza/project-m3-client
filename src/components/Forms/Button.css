@@ -4,8 +4,8 @@
   cursor: pointer;
   border: none;
   border-radius: 0.4rem;
-  background: #f1b252;
-  color: #764701;
+  background: linear-gradient(0deg, #f1b252, rgb(255, 209, 94));
+  color: #252525;
   padding: 0.8rem 1.2rem;
   box-sizing: border-box;
   transition: 0.1s;
@@ -14,6 +14,7 @@
 
 .button:hover,
 .button:focus {
+  background: white;
   outline: none;
   box-shadow: 0 0 0 3px #fea, 0 0 0 4px #f1b252;
 }

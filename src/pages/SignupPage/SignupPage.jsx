@@ -48,6 +48,7 @@ function SignupPage() {
         <h1 className='title'>Create account</h1>
 
         <form onSubmit={handleSignupSubmit}>
+          <label>Username</label>
           <Input
             label='Username'
             type='text'
@@ -55,6 +56,7 @@ function SignupPage() {
             value={username}
             onChange={handleUsername}
           />
+          <label>E-mail</label>
           <Input
             label='E-mail'
             type='email'
@@ -62,6 +64,7 @@ function SignupPage() {
             value={email}
             onChange={handleEmail}
           />
+          <label>Password</label>
           <Input
             label='Password'
             type='password'

@@ -16,24 +16,28 @@ body {
   padding-top: 4rem;
   margin: 0px;
   color: #141414;
-  --type-first: Helvetica, Arial, sans-serif;
-  --type-second: 'Source Serif Pro', Georgia;
+  --type-first: 'Roboto', sans-serif;
+  --type-second: 'Varela Round', cursive;
   font-family: var(--type-first);
 }
 
 h1,
 h2,
 h3,
-h4,
+h4 {
+  margin: 0;
+}
+
 p {
-  margin: 0px;
+  margin: 0;
+  font-weight: 300;
 }
 
 ul,
 li {
   list-style: none;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 img {

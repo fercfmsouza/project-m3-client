@@ -12,15 +12,24 @@ form {
   margin-top: 4rem;
 }
 
+.create-account .button {
+  font-weight: 300;
+}
+
 .create-account p {
   margin-top: 2rem;
   margin-bottom: 2rem;
+  font-weight: 100;
 }
 
 .subtitle {
   font-family: var(--type-second);
   line-height: 1;
   font-size: 2rem;
+}
+
+label {
+  font-weight: 300;
 }
 
 .subtitle::after {
@@ -35,16 +44,22 @@ form {
 .lost-password {
   display: inline-block;
   color: #666;
+  width: 9rem;
   padding: 0.5rem 0;
   line-height: 1;
+  font-weight: 100;
 }
 
 .lost-password::after {
   content: '';
-  height: 2px;
+  height: 1px;
   width: 100%;
   background: currentColor;
   display: block;
+}
+
+div.wrapper-input {
+  margin-bottom: 1rem;
 }
 
 .LoginPage {
@@ -64,6 +79,14 @@ form {
 .forms {
   max-width: 30rem;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.forms button {
+  margin-top: 1rem;
+  font-weight: 500;
 }
 
 @media (max-width: 40rem) {
