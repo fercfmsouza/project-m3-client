@@ -1,13 +1,12 @@
-import React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { api } from '../../api';
 
 import { AuthContext } from '../../context/auth.context';
-import './PostPage.css';
 import { useGoBack } from '../../hooks/useGoBack';
 import Input from '../../components/Forms/Input';
-import Button from '../../components/Forms/Button';
+import './PostPage.css';
+import Likes from '../../components/Likes/Likes';
 
 const PostPage = () => {
   const { id } = useParams();
@@ -80,14 +79,15 @@ const PostPage = () => {
   if (!post) return null;
 
   return (
-    <>
+    <div>
       <div className='post-intro'>
         <h1 className='title'>{post.owner.username}</h1>
+
         <div className='buttons'>
           <img
             className='back'
             onClick={goBack}
-            src='../../../back-arrow.png'
+            src='../../../goback-arrow.svg'
             alt='back-arrow'
           />
           <Link to='/newpost'>
@@ -97,65 +97,77 @@ const PostPage = () => {
       </div>
 
       <div className='PostPage'>
-        <img className='photo' src={post.image} alt='random_image' />
+        <div className='photo'>
+          <img src={post.image} alt='random_image' />
+        </div>
 
         <div className='post-details'>
           <div>
-            <div className='post-custom'>
-              {isPostOwner && (
-                <div className='edit-buttons'>
-                  <button className='delete' onClick={handleDelete}>
-                    Delete
-                  </button>
-                  <button onClick={toggleEditionMode}>Edit</button>
-                </div>
-              )}
-              <p>Views: {views}</p>
-            </div>
+            <p className='post-author'>
+              <Link to={`/profile/${user._id}`}>@{post.owner.username}</Link>
+              <span className='views-post'>views{views}</span>
+            </p>
 
-            <div className='post-form'>
-              {!isEditionEnabled && (
-                <h2>
-                  {post.owner.username.toLowerCase()}{' '}
-                  <span>{post.description}</span>
-                </h2>
-              )}
-              {isEditionEnabled && (
-                <form onSubmit={handleEdition} style={{ display: 'flex' }}>
-                  <input
-                    type='text'
-                    name='description'
-                    placeholder={post.description}
-                  />
-                  <Button>Save Edition</Button>
-                </form>
-              )}
+            {isPostOwner && (
+              <div className='edit-buttons'>
+                <button className='btn-delete' onClick={handleDelete}>
+                  Delete
+                </button>
+                <button className='btn-edit' onClick={toggleEditionMode}>
+                  Edit
+                </button>
+              </div>
+            )}
 
-              <p>{post.createdAt.toString()}</p>
-            </div>
+            <h1 className='title'>{post.owner.username}</h1>
+
+            {!isEditionEnabled && (
+              <h2 className='description'>{post.description}</h2>
+            )}
+
+            {isEditionEnabled && (
+              <form
+                className='edit-form'
+                onSubmit={handleEdition}
+                style={{ display: 'flex' }}
+              >
+                <input
+                  type='text'
+                  name='description'
+                  placeholder={post.description}
+                />
+                <button className='btn-edit'>Save Edition</button>
+              </form>
+            )}
           </div>
 
-          <div className='post-comments'>
+          <Likes />
+
+          <ul className='post-comments'>
             {!!post.comments.length &&
               post.comments.map((comment) => {
                 return (
-                  <div key={comment._id}>
-                    <p>author: {comment.owner.username}</p>
-                    <p>{comment.text}</p>
-                  </div>
+                  <li key={comment._id}>
+                    <b>
+                      {comment.owner.username}: {comment.text}
+                    </b>
+                  </li>
                 );
               })}
+          </ul>
 
-            <div className='post-newcomment'>
-              <form onSubmit={handleSubmit}>
-                <Input type='text' name='comment' placeholder='Comments...' />
-                <img src='../../../comment.svg' alt='button-comment' />
-              </form>
-            </div>
-          </div>
+          <form className='post-newcomment' onSubmit={handleSubmit}>
+            <Input type='text' name='comment' placeholder='Comments...' />
+            <button className='btn-comment'>
+              <img src='../../../comment.svg' alt='button-comment' />
+            </button>
+          </form>
         </div>
       </div>
-    </>
+      <div className='date'>
+        <p className='created-date'>created in {post.createdAt.toString()}</p>
+      </div>
+    </div>
   );
 };
 

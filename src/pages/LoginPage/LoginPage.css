@@ -9,7 +9,8 @@ form {
 }
 
 .create-account {
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
+  margin-bottom: 2rem;
 }
 
 .create-account .button {

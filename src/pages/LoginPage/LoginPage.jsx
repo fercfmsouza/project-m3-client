@@ -53,7 +53,6 @@ function LoginPage() {
         <h1 className='title'>Login</h1>
 
         <form onSubmit={handleLoginSubmit}>
-          <label>E-mail</label>
           <Input
             label='E-mail'
             type='email'
@@ -61,7 +60,6 @@ function LoginPage() {
             value={email}
             onChange={handleEmail}
           />
-          <label>Password</label>
           <Input
             label='Password'
             type='password'

@@ -1,0 +1,10 @@
+.likes {
+  display: flex;
+  align-items: center;
+}
+
+.like-btn {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
