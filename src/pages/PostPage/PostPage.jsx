@@ -27,7 +27,7 @@ const PostPage = () => {
     const response = await api.get(`/posts/${id}`);
 
     setPost(response.data);
-    setViews(response.data.views);
+    console.log(response.data);
   }
 
   async function handleDelete() {
@@ -76,24 +76,30 @@ const PostPage = () => {
     }
   }
 
+  useEffect(() => {
+    setViews(views + 1);
+  }, []);
+
   if (!post) return null;
 
   return (
-    <div>
+    <section className='mainContainer'>
       <div className='post-intro'>
         <h1 className='title'>{post.owner.username}</h1>
 
-        <div className='buttons'>
-          <img
-            className='back'
-            onClick={goBack}
-            src='../../../goback-arrow.svg'
-            alt='back-arrow'
-          />
-          <Link to='/newpost'>
-            <img src='../../../plus.svg' alt='plus-sign' />
-          </Link>
-        </div>
+        {isPostOwner && (
+          <div className='buttons'>
+            <img
+              className='back'
+              onClick={goBack}
+              src='../../../goback-arrow.svg'
+              alt='back-arrow'
+            />
+            <Link to='/newpost'>
+              <img src='../../../plus.svg' alt='plus-sign' />
+            </Link>
+          </div>
+        )}
       </div>
 
       <div className='PostPage'>
@@ -105,7 +111,7 @@ const PostPage = () => {
           <div>
             <p className='post-author'>
               <Link to={`/profile/${user._id}`}>@{post.owner.username}</Link>
-              <span className='views-post'>views{views}</span>
+              <span className='views-post'>views{post.views}</span>
             </p>
 
             {isPostOwner && (
@@ -136,7 +142,7 @@ const PostPage = () => {
                   name='description'
                   placeholder={post.description}
                 />
-                <button className='btn-edit'>Save Edition</button>
+                <button className='btn-edit'>Save</button>
               </form>
             )}
           </div>
@@ -167,7 +173,7 @@ const PostPage = () => {
       <div className='date'>
         <p className='created-date'>created in {post.createdAt.toString()}</p>
       </div>
-    </div>
+    </section>
   );
 };
 

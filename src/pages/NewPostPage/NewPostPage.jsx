@@ -58,7 +58,6 @@ const NewPostPage = () => {
       <div className='NewPostPage'>
         <form onSubmit={handleSubmit}>
           <Input label='Description' name='description' />
-          {/* <Input type='file' name='image' /> */}
           <input
             className='file'
             type='file'

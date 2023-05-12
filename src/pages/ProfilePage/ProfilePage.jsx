@@ -48,6 +48,9 @@ function ProfilePage() {
           </button>
         </div>
       </div>
+
+      {user.posts.length === 0 && <p>Create your first post.</p>}
+
       <ul className='feed animeLeft'>
         {user.posts.length > 0 &&
           user.posts.map((post) => {

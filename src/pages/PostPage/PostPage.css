@@ -237,7 +237,14 @@
     grid-template-columns: minmax(20rem, 40rem);
     border-radius: none;
     border: none;
-    margin: auto;
+    /* margin: auto; */
+    max-width: 50rem;
+    padding: 2rem 1rem 0 1rem;
+    margin: 0 auto;
+  }
+
+  .post-details {
+    overflow: unset;
   }
 
   .photo {
@@ -245,6 +252,12 @@
   }
 
   .post-intro {
+    margin: 0 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .date {
+    /* margin: auto 1.5rem 1rem auto; */
     margin: 0 1rem;
     padding-bottom: 2rem;
   }
