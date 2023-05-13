@@ -14,13 +14,12 @@ const PostPage = () => {
   const navigate = useNavigate();
   const { goBack } = useGoBack();
   const [post, setPost] = useState();
-  const [views, setViews] = useState(0);
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
 
   const isPostOwner = user && post && user._id === post.owner._id;
 
   useEffect(() => {
-    getPost();
+    incrementPostViews();
   }, []);
 
   async function getPost() {
@@ -28,6 +27,15 @@ const PostPage = () => {
 
     setPost(response.data);
     console.log(response.data);
+  }
+
+  async function incrementPostViews() {
+    try {
+      const response = await api.put(`/posts/${id}/views/increment`);
+      if (response.status === 200) getPost();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function handleDelete() {
@@ -76,10 +84,6 @@ const PostPage = () => {
     }
   }
 
-  useEffect(() => {
-    setViews(views + 1);
-  }, []);
-
   if (!post) return null;
 
   return (
@@ -110,8 +114,10 @@ const PostPage = () => {
         <div className='post-details'>
           <div>
             <p className='post-author'>
-              <Link to={`/profile/${user._id}`}>@{post.owner.username}</Link>
-              <span className='views-post'>views{post.views}</span>
+              <Link to={`/profile/${post.owner._id}`}>
+                @{post.owner.username}
+              </Link>
+              <span className='views-post'>{post.views}</span>
             </p>
 
             {isPostOwner && (

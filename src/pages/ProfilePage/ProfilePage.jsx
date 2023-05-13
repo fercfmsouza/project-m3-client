@@ -67,7 +67,7 @@ function ProfilePage(props) {
                     key={post._id}
                     alt={post.description}
                   />
-                  <span className='feed-views'>views</span>
+                  <span className='feed-views'>{post.views}</span>
                 </Link>
               </li>
             );

@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../../api';
 import './HomePage.css';
+import Loading from '../../components/Loading/Loading';
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,8 +33,13 @@ function HomePage() {
             return (
               <li key={post._id} className='feed-item'>
                 <Link className='feed-link' to={`/post/${post._id}`}>
-                  <img className='feed-img' src={post.image} alt='post' />
-                  <span className='feed-views'>views</span>
+                  <img
+                    loading='lazy'
+                    className='feed-img'
+                    src={post.image}
+                    alt='post'
+                  />
+                  <span className='feed-views'>{post.views || 0}</span>
                 </Link>
               </li>
             );
