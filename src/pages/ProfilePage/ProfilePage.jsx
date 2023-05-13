@@ -6,7 +6,7 @@ import './ProfilePage.css';
 import { api } from '../../api';
 import { useGoBack } from '../../hooks/useGoBack';
 
-function ProfilePage() {
+function ProfilePage(props) {
   const { logOutUser } = useContext(AuthContext);
 
   const { id } = useParams();
@@ -39,7 +39,7 @@ function ProfilePage() {
             <img src='../../../plus.svg' alt='plus-sign' />
           </Link>
 
-          <Link to={`/users/${id}/settings`}>
+          <Link to={`/settings`}>
             <img src='../../../settings.svg' alt='settings-sign' />
           </Link>
 

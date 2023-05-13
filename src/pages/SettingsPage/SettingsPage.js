@@ -4,23 +4,23 @@ import { useGoBack } from '../../hooks/useGoBack';
 import './SettingsPage.css';
 
 const SettingsPage = () => {
-  const { id } = useParams();
-  const [user, setUser] = useState();
-  const { goBack } = useGoBack();
+  // const { id } = useParams();
+  // const [user, setUser] = useState();
+   const { goBack } = useGoBack();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await api.get(`/users/${id}/settings`);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await api.get(`/users/${id}/settings`);
 
-        setUser(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  //       setUser(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchUser();
-  }, []);
+  //   fetchUser();
+  // }, []);
 
   return (
     <div>

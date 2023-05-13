@@ -7,6 +7,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import PostPage from './pages/PostPage/PostPage';
 import NewPostPage from './pages/NewPostPage/NewPostPage';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
@@ -22,10 +23,26 @@ function App() {
           <Route path='/' element={<HomePage />} />
 
           <Route
-            path='/profile/:id'
+            path='/profile'
             element={
               <IsPrivate>
                 <ProfilePage />
+              </IsPrivate>
+            }
+          />
+
+          <Route
+            path='/profile/:id'
+            element={
+                <ProfilePage />
+            }
+          />
+
+          <Route
+            path='/settings'
+            element={
+              <IsPrivate>
+                <SettingsPage />
               </IsPrivate>
             }
           />
