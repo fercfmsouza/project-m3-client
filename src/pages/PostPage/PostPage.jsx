@@ -15,6 +15,7 @@ const PostPage = () => {
   const { goBack } = useGoBack();
   const [post, setPost] = useState();
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const isPostOwner = user && post && user._id === post.owner._id;
 
@@ -81,6 +82,8 @@ const PostPage = () => {
       }
     } catch (error) {
       console.error(error);
+      const errorDescription = 'Please Login to comment.';
+      setErrorMessage(errorDescription);
     }
   }
 
@@ -173,6 +176,7 @@ const PostPage = () => {
             <button className='btn-comment'>
               <img src='../../../comment.svg' alt='button-comment' />
             </button>
+            {errorMessage && <p className='error-message'>{errorMessage}</p>}
           </form>
         </div>
       </div>
