@@ -14,6 +14,7 @@ const PostPage = () => {
   const navigate = useNavigate();
   const { goBack } = useGoBack();
   const [post, setPost] = useState();
+  const [comment, setComment] = useState();
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -44,6 +45,16 @@ const PostPage = () => {
       if (response.status === 200) navigate(`/profile/${user._id}`);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async function handleCommentDelete(id) {
+
+    try {
+      const response = await api.delete(`/comments/${id}/posts/${post._id}`)
+      if (response.status === 200) getPost();
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -174,6 +185,7 @@ const PostPage = () => {
                       <b>
                         {comment.owner.username}: <span>{comment.text}</span>
                       </b>
+                      {isEditionEnabled && <button onClick={() => handleCommentDelete(comment._id)}> Delete </button>}
                     </li>
                   );
                 })}
