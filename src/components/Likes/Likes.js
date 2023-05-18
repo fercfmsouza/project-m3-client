@@ -1,13 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { api } from '../../api';
 import './Likes.css';
 
 const Likes = () => {
   const [liked, setLiked] = useState(false);
   const [count, setCount] = useState(0);
+  const [post, setPost] = useState();
+  
+  
+  async function getPost() {
+    const response = await api.get(`/posts/${post._id}`);
 
-  const handleLike = () => {
-    setLiked(!liked);
+    setPost(response.data);
+    console.log(response.data);
+    console.log(post)
+  }
+
+  async function handleLike() {
+    setLiked((prevState) => !prevState);
     setCount(count + (liked ? -1 : 1));
+    
+    try {
+      const response = await api.put(`/posts/${post._id}/likes`);
+      if (response.status === 200) {
+        getPost();
+        count = post.likes;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
