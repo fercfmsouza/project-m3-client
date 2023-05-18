@@ -27,7 +27,6 @@ const PostPage = () => {
     const response = await api.get(`/posts/${id}`);
 
     setPost(response.data);
-    console.log(response.data);
   }
 
   async function incrementPostViews() {
@@ -110,15 +109,11 @@ const PostPage = () => {
       </div>
 
       <div className='PostPage'>
-        
         <img className='photo' src={post.image} alt='random_image' />
 
         <div className='post-details'>
-          
           <div className='post-info'>
-            
             <div className='post-custom'>
-
               <p className='post-author'>
                 <span className='views-post'>{post.views}</span>
               </p>
@@ -134,42 +129,43 @@ const PostPage = () => {
                 </div>
               )}
 
-              {!isPostOwner && 
+              {!isPostOwner && (
                 <Link className='post-author' to={`/profile/${post.owner._id}`}>
                   @{post.owner.username}
                 </Link>
-              }
-
+              )}
             </div>
 
-              {!isEditionEnabled && (
-                <h2>{post.owner.username.toLowerCase()} <span>{post.description}</span></h2>
-                )}
+            {!isEditionEnabled && (
+              <h2>
+                {post.owner.username.toLowerCase()}
+                <span>{post.description}</span>
+              </h2>
+            )}
 
-              {isEditionEnabled && (
-                <form
+            {isEditionEnabled && (
+              <form
                 className='edit-form'
                 onSubmit={handleEdition}
                 style={{ display: 'flex' }}
-                >
-                  <input
-                    type='text'
-                    name='description'
-                    placeholder={post.description}
-                  />
-                  <button className='btn-edit'>Save</button>
-                </form>
-              )}
+              >
+                <input
+                  type='text'
+                  name='description'
+                  placeholder={post.description}
+                />
+                <button className='btn-edit'>Save</button>
+              </form>
+            )}
 
-              <p className='created-date'>created in {post.createdAt.valueOf()}</p>
-             
-              <Likes />
+            <p className='created-date'>
+              created in {post.createdAt.valueOf()}
+            </p>
 
+            <Likes user={user} post={post} getPost={getPost} />
           </div>
 
-
           <div>
-
             <ul className='post-comments'>
               {!!post.comments.length &&
                 post.comments.map((comment) => {
@@ -190,7 +186,6 @@ const PostPage = () => {
               </button>
               {errorMessage && <p className='error-message'>{errorMessage}</p>}
             </form>
-
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { api } from '../../api';
 import { useParams } from 'react-router-dom';
 
-import { useGoBack } from '../../hooks/useGoBack'
+import { useGoBack } from '../../hooks/useGoBack';
 import { AuthContext } from '../../context/auth.context';
 
 import './SettingsPage.css';
@@ -11,7 +11,7 @@ const SettingsPage = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const { goBack } = useGoBack();
-  const [ isEditionEnabled, setIsEditionEnabled ] = useState(false);
+  const [isEditionEnabled, setIsEditionEnabled] = useState(false);
 
   async function getUser() {
     const response = await api.get(`/users/${id}`);
@@ -45,47 +45,42 @@ const SettingsPage = () => {
 
   return (
     <>
-    <div>
+      <div>
         <h1>Settings Page</h1>
         <br />
         <div>
-            <h3>Here display our graphs</h3>
+          <h3>Here display our graphs</h3>
         </div>
         <br />
         <button className='btn-edit' onClick={toggleEditionMode}>
           Edit
         </button>
         {isEditionEnabled && (
-                <form
-                className='edit-form'
-                onSubmit={handleEdition}
-                style={{ display: 'flex' }}
-                >
-                  <input
-                    type='text'
-                    name='description'
-                    placeholder={user.email}
-                  />
-                  <button className='btn-edit'>Save</button>
-                </form>
+          <form
+            className='edit-form'
+            onSubmit={handleEdition}
+            style={{ display: 'flex' }}
+          >
+            <input type='text' name='description' placeholder={user.email} />
+            <button className='btn-edit'>Save</button>
+          </form>
         )}
         <ul>
-            <li>Edit your profile</li>
-            <li>Switch theme</li>
-            <li>Change language</li>
+          <li>Edit your profile</li>
+          <li>Switch theme</li>
+          <li>Change language</li>
         </ul>
         <br />
         <button>Delete profile</button>
         <button onClick={goBack} className='back-button'>
           Back
         </button>
-    </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default SettingsPage
-
+export default SettingsPage;
 
 // import { useEffect, useState, useParams } from 'react';
 // // import { api } from '../../api';

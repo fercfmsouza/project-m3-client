@@ -32,7 +32,7 @@ function HomePage() {
           posts.map((post) => {
             return (
               <li key={post._id} className='feed-item'>
-                <Link className='feed-link' to={`/post/${post._id}`}>
+                <Link className='skeleton' to={`/post/${post._id}`}>
                   <img
                     loading='lazy'
                     className='feed-img'

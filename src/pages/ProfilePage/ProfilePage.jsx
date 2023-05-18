@@ -1,59 +1,68 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+import Loading from '../../components/Loading/Loading';
 import './ProfilePage.css';
 
 import { api } from '../../api';
 import { useGoBack } from '../../hooks/useGoBack';
 
-function ProfilePage(props) {
-  const { logOutUser } = useContext(AuthContext);
+function ProfilePage() {
+  const { user, logOutUser } = useContext(AuthContext);
 
   const { id } = useParams();
-  const [user, setUser] = useState();
+  const [profileUser, setProfileUser] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { goBack } = useGoBack();
+
+  const isProfileOwner = user._id === id;
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        setIsLoading(true);
         const response = await api.get(`/users/${id}`);
 
-        setUser(response.data);
+        setProfileUser(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
 
     fetchUser();
-  }, []);
+  }, [id]);
 
-  if (!user) return null;
+  if (!profileUser || isLoading) return <Loading />;
 
   return (
     <section className='container animeLeft'>
       <div className='header-newpost'>
-        <h1 className='title'>{user.username}</h1>
+        <h1 className='title'>{profileUser.username}</h1>
 
-        <div className='wrapper-links'>
-          <Link to='/newpost'>
-            <img src='../../../plus.svg' alt='plus-sign' />
-          </Link>
+        {isProfileOwner && (
+          <div className='wrapper-links'>
+            <Link to='/newpost'>
+              <img src='../../../plus.svg' alt='plus-sign' />
+            </Link>
 
-          <Link to={`/settings`}>
-            <img src='../../../settings.svg' alt='settings-sign' />
-          </Link>
+            <Link to={`/settings`}>
+              <img src='../../../settings.svg' alt='settings-sign' />
+            </Link>
 
-          <button onClick={logOutUser} className='btn-logout'>
-            <img src='../../../logout.svg' alt='settings-sign' />
-          </button>
-        </div>
+            <button onClick={logOutUser} className='btn-logout'>
+              <img src='../../../logout.svg' alt='settings-sign' />
+            </button>
+          </div>
+        )}
       </div>
 
-      {user.posts.length === 0 && <p>Create your first post.</p>}
+      {profileUser.posts.length === 0 && <p>Create your first post.</p>}
 
       <ul className='feed animeLeft'>
-        {user.posts.length > 0 &&
-          user.posts.map((post) => {
+        {profileUser.posts.length > 0 &&
+          profileUser.posts.map((post) => {
             return (
               <li key={post._id} className='feed-item'>
                 <Link
