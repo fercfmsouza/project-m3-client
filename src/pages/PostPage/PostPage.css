@@ -1,16 +1,10 @@
 .PostPage {
   display: grid;
-  margin: 30px;
+  grid-template-columns: 1fr 1fr;
   margin: 2rem 10rem;
-  height: 36rem;
   border-radius: 0.2rem;
   border: 1px solid #ddd;
   background: white;
-  grid-template-columns: 36rem 20rem;
-  grid-template-rows: auto 1fr auto;
-  overflow: hidden;
-  transform: scale(0.8);
-  animation: scaleUp 0.3s forwards;
 }
 
 @keyframes scaleUp {
@@ -71,13 +65,8 @@
 }
 
 .photo {
-  grid-row: 1/4;
-}
-
-.photo img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+  max-width: 564px;
+  max-height: 908px;
 }
 
 .edit-buttons {
@@ -86,12 +75,26 @@
   justify-content: flex-end;
   gap: 0.5rem;
 }
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-info h2 {
+  font-weight: 700;
+}
+
+.post-info span {
+  font-weight: 300;
+}
+
 .post-custom {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
-  margin-right: 11rem;
 }
 
 .edit-buttons button,
@@ -105,12 +108,12 @@
   justify-content: center;
   border: 1px solid transparent;
   transition: 0.1s;
+  font-weight: 300;
 }
 
-/* .edit-form {
-  align-items: center;
-  gap: 5px;
-} */
+.edit-form input {
+  font-weight: 300;
+} 
 
 .post-form {
   margin: 1rem 0;
@@ -125,7 +128,9 @@
 
 .post-details {
   padding: 2rem 2rem 0 2rem;
-  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .post-newcomment {
@@ -135,9 +140,13 @@
   /* margin: 1rem; */
 }
 
+.post-newcomment input {
+  font-weight: 300;
+}
+
 .post-newcomment img:hover {
-  filter: invert(86%) sepia(4%) saturate(7018%) hue-rotate(329deg)
-    brightness(98%) contrast(92%);
+  filter: invert(85%) sepia(3%) saturate(7018%) hue-rotate(328deg)
+    brightness(98%) contrast(90%);
   cursor: pointer;
 }
 
@@ -145,17 +154,33 @@
   cursor: pointer;
   background: none;
   border: none;
+  width: 3.5rem;
+  margin-left: 1rem;
 }
 
-.btn-delete:focus,
-.btn-delete:hover,
+.btn-comment:hover,
+.btn-comment:focus {
+  padding-bottom: 0.5px;
+}
+
+.edit-buttons .btn-delete:focus,
+.edit-buttons .btn-delete:hover {
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgb(255, 177, 170);
+  outline: none;
+  border-color: rgb(204, 3, 3);
+  color: rgb(204, 3, 3);
+}
+
 .btn-edit:focus,
 .btn-edit:hover {
   cursor: pointer;
   background-color: #fff;
   box-shadow: 0 0 0 3px #fea;
   outline: none;
-  border-color: red;
+  border-color: #fb1;
+  color: #fb1;
 }
 
 .edit-buttons button:hover,
@@ -183,15 +208,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 100;
 }
 
-.post-author a:hover {
-  text-decoration: underline;
+.post-author:hover {
+  text-decoration: underline 0.5px;
+  margin-left: -1px;
 }
 
 .post-comments {
   overflow-y: auto;
   word-break: break-all;
+}
+
+.post-comments span {
+  font-weight: 300;
+}
+
+.post-comments b {
+  font-weight: 500;
 }
 
 .post-comments li {
@@ -213,14 +248,24 @@
 
 .created-date {
   font-size: 0.8rem;
-  text-align: right;
+  font-weight: 100;
 }
 
 .likes {
   gap: 5px;
+  align-self: center;
   margin-bottom: 1.5rem;
   border-top: solid #ddd;
+  margin-top: 2rem;
   padding-top: 0.5rem;
+  font-weight: 300;
+}
+
+.likes:focus,
+.likes:hover {
+  cursor: pointer;
+  padding-top: 0.4rem;
+  margin-bottom: 1.6rem;
 }
 
 .like-btn {
@@ -260,5 +305,12 @@
     /* margin: auto 1.5rem 1rem auto; */
     margin: 0 1rem;
     padding-bottom: 2rem;
+  }
+
+  .likes {
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
+    margin-top: -3rem;
+    padding-top: 0.5rem;
   }
 }
