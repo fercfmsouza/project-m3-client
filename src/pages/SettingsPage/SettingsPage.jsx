@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { api } from '../../api';
 import { useParams } from 'react-router-dom';
 
 import { useGoBack } from '../../hooks/useGoBack';
 import { AuthContext } from '../../context/auth.context';
+
+import { VictoryPie } from 'victory';
 
 import './SettingsPage.css';
 
@@ -12,6 +14,31 @@ const SettingsPage = () => {
   const { user } = useContext(AuthContext);
   const { goBack } = useGoBack();
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
+  const [userStatistics, setUserStatistics] = useState({
+    userTotalViews: 0,
+    userTotalLikes: 0,
+  });
+  const [generalStatistics, setGeneralStatistics] = useState({
+    averageViews: 0,
+    averageLikes: 0,
+  });
+
+  const getUserStatistics = async () => {
+    try {
+      const { data } = await api.get('users/settings/statistics');
+      const { averageViews, averageLikes, userTotalViews, userTotalLikes } =
+        data;
+
+      setUserStatistics({ userTotalViews, userTotalLikes });
+      setGeneralStatistics({ averageViews, averageLikes });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserStatistics();
+  }, []);
 
   async function getUser() {
     const response = await api.get(`/users/${user._id}`);
@@ -45,12 +72,69 @@ const SettingsPage = () => {
 
   return (
     <>
-      <div>
-        <h1>Settings Page</h1>
+      <div className='container'>
+        <h1 className='title'>Settings Page</h1>
         <br />
-        <div>
-          <h3>Here display our graphs</h3>
+        <div className='graph'>
+          <div className='graphItem'>
+            <h2>User Statistics</h2>
+            <VictoryPie
+              colorScale={['#f1b252', '#f9d16b']}
+              data={[
+                {
+                  x: `Views: ${userStatistics.userTotalViews}`,
+                  y: userStatistics.userTotalViews,
+                },
+                {
+                  x: `Likes: ${userStatistics.userTotalLikes}`,
+                  y: userStatistics.userTotalLikes,
+                },
+              ]}
+              innerRadius={50}
+              padding={{ top: 20, bottom: 20, left: 80, right: 80 }}
+              style={{
+                data: {
+                  fillOpacity: 0.9,
+                  stroke: '#fff',
+                  strokeWidth: 2,
+                },
+                labels: {
+                  fontSize: 14,
+                  fill: '#333',
+                },
+              }}
+            />
+          </div>
+          <div className='graphItem'>
+            <h2>All Users Average Statistics</h2>
+            <VictoryPie
+              data={[
+                {
+                  x: `Views: ${generalStatistics.averageViews}`,
+                  y: generalStatistics.averageViews,
+                },
+                {
+                  x: `Likes: ${generalStatistics.averageLikes}`,
+                  y: generalStatistics.averageLikes,
+                },
+              ]}
+              innerRadius={50}
+              padding={{ top: 20, bottom: 20, left: 80, right: 80 }}
+              style={{
+                data: {
+                  fillOpacity: 0.9,
+                  stroke: '#fff',
+                  strokeWidth: 2,
+                },
+                labels: {
+                  fontSize: 14,
+                  fill: '#333',
+                },
+              }}
+            />
+          </div>
         </div>
+
         <br />
         <button className='btn-edit' onClick={toggleEditionMode}>
           Edit
@@ -81,62 +165,3 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
-
-// import { useEffect, useState, useParams } from 'react';
-// // import { api } from '../../api';
-// import { useGoBack } from '../../hooks/useGoBack';
-// import './SettingsPage.css';
-// import { VictoryPie, VictoryChart, VictoryBar } from 'victory';
-
-// const SettingsPage = () => {
-//   const [graph, setGraph] = useState([]);
-//   const { goBack } = useGoBack();
-
-//   useEffect(() => {
-//     const graphData = data.map((item) => {
-//       return {
-//         x: item.username,
-//         y: Number(item.views),
-//       };
-//     });
-
-//     setGraph(graphData);
-//   }, []);
-
-//   return (
-//     <div>
-//       <div>
-//         <h1 className='title'>Settings</h1>
-//       </div>
-//       <div>{post.views}</div>
-//       <div>
-//         <VictoryPie
-//           data={graph}
-//           innerRadius={50}
-//           padding={{ top: 20, bottom: 20, left: 80, right: 80 }}
-//           style={{
-//             data: {
-//               fillOpacity: 0.9,
-//               stroke: '#fff',
-//               strokeWidth: 2,
-//             },
-//             labels: {
-//               fontSize: 4,
-//               fill: '#333',
-//             },
-//           }}
-//         />
-//       </div>
-//       <div>
-//         <VictoryChart>
-//           <VictoryBar alignment='start' data={graph}></VictoryBar>
-//         </VictoryChart>
-//       </div>
-//       <button onClick={goBack} className='back-button'>
-//         Back
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default SettingsPage;

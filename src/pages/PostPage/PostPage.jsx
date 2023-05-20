@@ -48,9 +48,8 @@ const PostPage = () => {
   }
 
   async function handleCommentDelete(id) {
-
     try {
-      const response = await api.delete(`/comments/${id}/posts/${post._id}`)
+      const response = await api.delete(`/comments/${id}/posts/${post._id}`);
       if (response.status === 200) getPost();
     } catch (error) {
       console.log(error);
@@ -69,7 +68,7 @@ const PostPage = () => {
     if (description) {
       try {
         const response = await api.put(`/posts/${post._id}`, { description });
-  
+
         if (response.status === 200) {
           getPost();
           setIsEditionEnabled(false);
@@ -80,7 +79,7 @@ const PostPage = () => {
     } else {
       try {
         const response = await api.get(`/posts/${post._id}`);
-  
+
         if (response.status === 200) {
           getPost();
           setIsEditionEnabled(false);
@@ -160,7 +159,10 @@ const PostPage = () => {
             </div>
 
             {!isEditionEnabled && (
-              <h2>{post.owner.username.toLowerCase()} <span>{post.description}</span></h2>
+              <h2>
+                {post.owner.username.toLowerCase()}{' '}
+                <span>{post.description}</span>
+              </h2>
             )}
 
             {isEditionEnabled && (
@@ -179,7 +181,7 @@ const PostPage = () => {
             )}
 
             <p className='created-date'>
-              created in {post.createdAt.valueOf()}
+              created in {new Date(post.createdAt).toLocaleDateString()}
             </p>
 
             <Likes user={user} post={post} getPost={getPost} />
@@ -190,11 +192,18 @@ const PostPage = () => {
               {!!post.comments.length &&
                 post.comments.map((comment) => {
                   return (
-                    <li key={comment._id}>
+                    <li className='comments-wrapper' key={comment._id}>
                       <b>
                         {comment.owner.username}: <span>{comment.text}</span>
                       </b>
-                      {isEditionEnabled && <button onClick={() => handleCommentDelete(comment._id)}> Delete </button>}
+                      {isEditionEnabled && (
+                        <button
+                          className='btn-trash'
+                          onClick={() => handleCommentDelete(comment._id)}
+                        >
+                          <img src='../../../trash.svg' alt='trash-bin' />
+                        </button>
+                      )}
                     </li>
                   );
                 })}

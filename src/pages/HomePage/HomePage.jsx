@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../../api';
 import './HomePage.css';
-import Loading from '../../components/Loading/Loading';
+import Image from '../../components/Image/Image';
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -24,21 +23,14 @@ function HomePage() {
 
   return (
     <section className='container mainContainer'>
-      {/* feedModal */}
-
       <ul className='feed animeLeft'>
         {posts &&
           posts.length > 0 &&
           posts.map((post) => {
             return (
               <li key={post._id} className='feed-item'>
-                <Link className='skeleton' to={`/post/${post._id}`}>
-                  <img
-                    loading='lazy'
-                    className='feed-img'
-                    src={post.image}
-                    alt='post'
-                  />
+                <Link className='feed-link' to={`/post/${post._id}`}>
+                  <Image imgUrl={post.image} />
                   <span className='feed-views'>{post.views || 0}</span>
                 </Link>
               </li>

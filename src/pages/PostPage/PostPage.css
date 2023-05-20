@@ -117,7 +117,7 @@
 
 .edit-form input {
   font-weight: 300;
-} 
+}
 
 .post-form {
   margin: 1rem 0;
@@ -195,6 +195,27 @@
   outline: none;
   border-color: #fb1;
   color: #252525;
+}
+
+.comments-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-trash {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 2.5rem;
+  margin-left: 1rem;
+}
+
+.btn-trash:hover {
+  /* padding-bottom: 0.5px; */
+  filter: invert(85%) sepia(3%) saturate(7018%) hue-rotate(328deg)
+    brightness(98%) contrast(90%);
+  cursor: pointer;
 }
 
 .views-post::before {
