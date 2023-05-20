@@ -14,7 +14,7 @@ const SettingsPage = () => {
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
 
   async function getUser() {
-    const response = await api.get(`/users/${id}`);
+    const response = await api.get(`/users/${user._id}`);
 
     response.data = user;
     console.log(response.data);
@@ -30,7 +30,7 @@ const SettingsPage = () => {
     const email = e.target.email;
 
     try {
-      const response = await api.put(`/users/${user._id}`, email);
+      const response = await api.put(`/users/${id}`, email);
 
       if (response.status === 200) {
         getUser();

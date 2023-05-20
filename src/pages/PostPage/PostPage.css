@@ -5,6 +5,7 @@
   border-radius: 0.2rem;
   border: 1px solid #ddd;
   background: white;
+  max-height: 41rem;
 }
 
 @keyframes scaleUp {
@@ -65,8 +66,11 @@
 }
 
 .photo {
-  max-width: 564px;
-  max-height: 908px;
+  object-fit: cover;
+  max-height: 40rem;
+  min-height: 25rem;
+  width: 100%;
+  align-self: center;
 }
 
 .edit-buttons {
@@ -219,6 +223,7 @@
 .post-comments {
   overflow-y: auto;
   word-break: break-all;
+  max-height: 10rem;
 }
 
 .post-comments span {

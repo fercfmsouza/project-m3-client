@@ -14,7 +14,6 @@ const PostPage = () => {
   const navigate = useNavigate();
   const { goBack } = useGoBack();
   const [post, setPost] = useState();
-  const [comment, setComment] = useState();
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -67,15 +66,28 @@ const PostPage = () => {
 
     const description = e.target.description.value;
 
-    try {
-      const response = await api.put(`/posts/${post._id}`, { description });
-
-      if (response.status === 200) {
-        getPost();
-        setIsEditionEnabled(false);
+    if (description) {
+      try {
+        const response = await api.put(`/posts/${post._id}`, { description });
+  
+        if (response.status === 200) {
+          getPost();
+          setIsEditionEnabled(false);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
+    } else {
+      try {
+        const response = await api.get(`/posts/${post._id}`);
+  
+        if (response.status === 200) {
+          getPost();
+          setIsEditionEnabled(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
@@ -148,10 +160,7 @@ const PostPage = () => {
             </div>
 
             {!isEditionEnabled && (
-              <h2>
-                {post.owner.username.toLowerCase()}
-                <span>{post.description}</span>
-              </h2>
+              <h2>{post.owner.username.toLowerCase()} <span>{post.description}</span></h2>
             )}
 
             {isEditionEnabled && (
@@ -176,7 +185,7 @@ const PostPage = () => {
             <Likes user={user} post={post} getPost={getPost} />
           </div>
 
-          <div>
+          <div className='comments'>
             <ul className='post-comments'>
               {!!post.comments.length &&
                 post.comments.map((comment) => {
