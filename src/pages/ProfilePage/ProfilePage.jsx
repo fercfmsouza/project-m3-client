@@ -58,7 +58,15 @@ function ProfilePage() {
         )}
       </div>
 
-      {profileUser.posts.length === 0 && <p>Create your first post.</p>}
+      {profileUser.posts.length === 0 && (
+        <>
+          <p>No posts yet.</p>
+          <Link to='/newpost'>
+            <br />
+            <button className='button'>Create a Post</button>
+          </Link>
+        </>
+      )}
 
       <ul className='feed animeLeft'>
         {profileUser.posts.length > 0 &&
@@ -83,9 +91,9 @@ function ProfilePage() {
           })}
       </ul>
 
-      <button onClick={goBack} className='back-button'>
+      {/* <button onClick={goBack} className='back-button'>
         Back
-      </button>
+      </button> */}
     </section>
   );
 }
