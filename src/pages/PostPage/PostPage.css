@@ -115,6 +115,10 @@
   font-weight: 300;
 }
 
+.btn-edit {
+  margin-left: 5px;
+}
+
 .edit-form input {
   font-weight: 300;
 }

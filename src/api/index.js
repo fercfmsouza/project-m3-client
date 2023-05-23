@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL || 'http://localhost:5005',
+  baseURL: isDevelopment
+    ? 'http://localhost:5005'
+    : 'https://teal-gleaming-parrot.cyclic.app',
 });
 
 api.interceptors.request.use((config) => {

@@ -73,7 +73,7 @@ const SettingsPage = () => {
   return (
     <>
       <div className='container'>
-        <h1 className='title'>Settings Page</h1>
+        <h1 className='title'>Settings</h1>
         <br />
         <div className='graph'>
           <div className='graphItem'>
