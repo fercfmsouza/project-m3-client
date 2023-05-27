@@ -32,7 +32,7 @@ function App() {
           />
 
           <Route
-            path='/settings'
+            path='/settings/:id'
             element={
               <IsPrivate>
                 <SettingsPage />

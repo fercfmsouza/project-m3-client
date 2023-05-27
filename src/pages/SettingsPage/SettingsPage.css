@@ -66,6 +66,19 @@
 
 .settings-liked {
   margin: 1rem;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.liked-posts {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.liked-posts img{
+  max-width: 10rem;
 }
 
 .settings-delete {
@@ -82,7 +95,8 @@
   border: 1px solid transparent;
   transition: 0.1s;
   font-weight: 300;
-  position:absolute;
+  position:sticky;
+  margin: 2rem;
 }
 
 .settings-btn-delete:focus,
@@ -100,6 +114,7 @@
   padding: 2rem;
   font-size: 2rem;
 }
+
 
 @media (max-width: 40rem) {
   .graph {

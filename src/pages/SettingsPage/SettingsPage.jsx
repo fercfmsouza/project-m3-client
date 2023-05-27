@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { api } from '../../api';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import { useGoBack } from '../../hooks/useGoBack';
 import { AuthContext } from '../../context/auth.context';
@@ -11,8 +11,9 @@ import './SettingsPage.css';
 
 const SettingsPage = () => {
   const { id } = useParams();
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { goBack } = useGoBack();
+  const navigate = useNavigate();
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
   const [userStatistics, setUserStatistics] = useState({
     userTotalViews: 0,
@@ -39,13 +40,11 @@ const SettingsPage = () => {
 
   async function getUser() {
     try {
-      const { response } = await api.get(`/users/${user._id}`);
-      const { email, image, likedPosts } = response;
-
-      console.log(response)
-  
-      setProfileUser({ email, likedPosts });
-      console.log(response); 
+      const response = await api.get(`/users/${id}`);
+      //const { email, image, likedPosts } = response;
+      
+      setProfileUser(response.data);
+      console.log(response.data)
     } catch (error) {
       console.log(error);
     }
@@ -61,13 +60,22 @@ const SettingsPage = () => {
     setIsEditionEnabled((previousState) => !previousState);
   }
 
+  async function handleDelete() {
+    try {
+      const deleteUser = await api.delete(`/user/${id}`)
+      if (deleteUser.status === 200) navigate('/');
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async function handleEdition(e) {
     e.preventDefault();
 
     const email = e.target.value;
     
     try {
-      const response = await api.put(`/users/${id}`, email);
+      const response = await api.put(`/users/edit/${id}`, email);
       if (response.status === 200) {
 
         setIsEditionEnabled(false);
@@ -173,16 +181,33 @@ const SettingsPage = () => {
           </ul>
         </div>
 
-        <div className='settings-liked'>
+        <div className="settings-liked">
           <h2>Liked posts</h2>
-          {user.likedPosts && <p>{user.likedPosts[0].description}</p>
-          }
-        </div>
+          <div className='liked-posts'>
+            {profileUser && profileUser.likedPosts && profileUser.likedPosts.length > 0 ? (
+              profileUser.likedPosts.map(post => (
+                <Link
+                    key={post._id}
+                    to={`/post/${post._id}`}
+                  >
+                    <img
+                      src={post.image}
+                      key={post._id}
+                      alt={post.description}
+                    />
+                  </Link>
+              ))
+            ) : (
+              <p>No liked posts</p>
+            )}
+          </div>
+
+          </div>
 
       </div>
 
       <div className='settings-delete'>
-        <button className='settings-btn-delete' onClick={logOutUser}>Delete profile</button>
+        <button className='settings-btn-delete' onClick={handleDelete}>Delete profile</button>
       </div>
     </>
   );
