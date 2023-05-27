@@ -92,7 +92,7 @@ const SettingsPage = () => {
       <div className='settings-intro'>
         <h1 className='title'>Settings</h1>
         <img
-              className='settings-back'
+              className='back'
               onClick={goBack}
               src='../../../goback-arrow.svg'
               alt='back-arrow'

@@ -47,7 +47,9 @@
 .buttons button:hover,
 .buttons button:focus,
 .buttons img:hover,
-.buttons img:focus {
+.buttons img:focus,
+.back img:hover,
+.back img:focus {
   background-color: white;
   box-shadow: 0 0 0 3px #fea;
   border-color: #fb1;

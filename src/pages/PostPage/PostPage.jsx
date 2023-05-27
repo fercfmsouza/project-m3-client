@@ -114,20 +114,21 @@ const PostPage = () => {
     <section>
       <div className='post-intro'>
         <h1 className='title'>{post.owner.username}'s post</h1>
-
+        
+        <div className='buttons'>
+        <img
+          className='back'
+          onClick={goBack}
+          src='../../../goback-arrow.svg'
+          alt='back-arrow'
+        />
         {isPostOwner && (
-          <div className='buttons'>
-            <img
-              className='back'
-              onClick={goBack}
-              src='../../../goback-arrow.svg'
-              alt='back-arrow'
-            />
             <Link to='/newpost'>
               <img src='../../../plus.svg' alt='plus-sign' />
             </Link>
-          </div>
         )}
+
+        </div>
       </div>
 
       <div className='PostPage'>

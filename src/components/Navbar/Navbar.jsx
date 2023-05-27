@@ -42,7 +42,7 @@ function Navbar() {
               </li>
               <li className='nav-item'>
                 <Link
-                  to={`/settings`}
+                  to={`/settings/${user._id}`}
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >

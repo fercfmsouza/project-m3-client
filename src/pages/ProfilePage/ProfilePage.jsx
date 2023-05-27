@@ -40,22 +40,28 @@ function ProfilePage() {
     <section className='container animeLeft'>
       <div className='header-newpost'>
         <h1 className='title'>{profileUser.username}</h1>
-
+        <div className='wrapper-links'>
+          <img
+              className='back'
+              onClick={goBack}
+              src='../../../goback-arrow.svg'
+              alt='back-arrow'
+            />
         {isProfileOwner && (
-          <div className='wrapper-links'>
+          <>
             <Link to='/newpost'>
               <img src='../../../plus.svg' alt='plus-sign' />
             </Link>
-
-            <Link to={`/settings`}>
+            <Link to={`/settings/${profileUser._id}`}>
               <img src='../../../settings.svg' alt='settings-sign' />
             </Link>
-
             <button onClick={logOutUser} className='btn-logout'>
               <img src='../../../logout.svg' alt='settings-sign' />
             </button>
-          </div>
+          </>
+          
         )}
+        </div>
       </div>
 
       {profileUser.posts.length === 0 && (

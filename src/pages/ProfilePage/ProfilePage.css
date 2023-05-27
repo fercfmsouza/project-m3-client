@@ -21,12 +21,15 @@
 .wrapper-links a:hover,
 .wrapper-links a:focus,
 .wrapper-links button:hover,
-.wrapper-links button:focus {
+.wrapper-links button:focus,
+.wrapper-links img:hover,
+.wrapper-links img:focus {
   background-color: white;
   box-shadow: 0 0 0 3px #fea;
   border-color: #fb1;
   outline: none;
   color: #fb1;
+  cursor: pointer;
 }
 
 .header-newpost {
