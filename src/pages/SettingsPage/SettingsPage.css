@@ -27,7 +27,7 @@
   cursor: pointer;
 }
 
-.back {
+.settings-back {
   background: #eee;
   border-radius: 0.2rem;
   padding: 0.38rem;
@@ -73,7 +73,7 @@
   justify-content: center;
 }
 
-.btn-delete {
+.settings-btn-delete {
   background: rgb(204, 3, 3);
   border-radius: 0.2rem;
   color: white;
@@ -85,8 +85,8 @@
   position:absolute;
 }
 
-.btn-delete:focus,
-.btn-delete:hover {
+.settings-btn-delete:focus,
+.settings-btn-delete:hover {
   cursor: pointer;
   background-color: #fff;
   box-shadow: 0 0 0 3px rgb(255, 177, 170);

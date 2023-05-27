@@ -84,7 +84,7 @@ const SettingsPage = () => {
       <div className='settings-intro'>
         <h1 className='title'>Settings</h1>
         <img
-              className='back'
+              className='settings-back'
               onClick={goBack}
               src='../../../goback-arrow.svg'
               alt='back-arrow'
@@ -182,7 +182,7 @@ const SettingsPage = () => {
       </div>
 
       <div className='settings-delete'>
-        <button className='btn-delete' onClick={logOutUser}>Delete profile</button>
+        <button className='settings-btn-delete' onClick={logOutUser}>Delete profile</button>
       </div>
     </>
   );
