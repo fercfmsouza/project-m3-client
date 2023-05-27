@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { api } from '../../api';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { useGoBack } from '../../hooks/useGoBack';
 import { AuthContext } from '../../context/auth.context';
@@ -11,7 +11,7 @@ import './SettingsPage.css';
 
 const SettingsPage = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const { goBack } = useGoBack();
   const [isEditionEnabled, setIsEditionEnabled] = useState(false);
   const [userStatistics, setUserStatistics] = useState({
@@ -22,6 +22,7 @@ const SettingsPage = () => {
     averageViews: 0,
     averageLikes: 0,
   });
+  const [profileUser, setProfileUser] = useState({});
 
   const getUserStatistics = async () => {
     try {
@@ -36,16 +37,25 @@ const SettingsPage = () => {
     }
   };
 
+  async function getUser() {
+    try {
+      const { response } = await api.get(`/users/${user._id}`);
+      const { email, image, likedPosts } = response;
+
+      console.log(response)
+  
+      setProfileUser({ email, likedPosts });
+      console.log(response); 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   useEffect(() => {
     getUserStatistics();
+    getUser();
   }, []);
 
-  async function getUser() {
-    const response = await api.get(`/users/${user._id}`);
-
-    response.data = user;
-    console.log(response.data);
-  }
 
   function toggleEditionMode() {
     setIsEditionEnabled((previousState) => !previousState);
@@ -54,13 +64,12 @@ const SettingsPage = () => {
   async function handleEdition(e) {
     e.preventDefault();
 
-    const email = e.target.email;
-
+    const email = e.target.value;
+    
     try {
       const response = await api.put(`/users/${id}`, email);
-
       if (response.status === 200) {
-        getUser();
+
         setIsEditionEnabled(false);
       }
     } catch (error) {
@@ -72,9 +81,17 @@ const SettingsPage = () => {
 
   return (
     <>
-      <div className='container'>
+      <div className='settings-intro'>
         <h1 className='title'>Settings</h1>
-        <br />
+        <img
+              className='back'
+              onClick={goBack}
+              src='../../../goback-arrow.svg'
+              alt='back-arrow'
+            />
+      </div>
+
+      <div className='settings-container'>
         <div className='graph'>
           <div className='graphItem'>
             <h2>User Statistics</h2>
@@ -135,30 +152,37 @@ const SettingsPage = () => {
           </div>
         </div>
 
-        <br />
-        <button className='btn-edit' onClick={toggleEditionMode}>
-          Edit
-        </button>
-        {isEditionEnabled && (
-          <form
-            className='edit-form'
-            onSubmit={handleEdition}
-            style={{ display: 'flex' }}
-          >
-            <input type='text' name='description' placeholder={user.email} />
-            <button className='btn-edit'>Save</button>
-          </form>
-        )}
-        <ul>
-          <li>Edit your profile</li>
-          <li>Switch theme</li>
-          <li>Change language</li>
-        </ul>
-        <br />
-        <button>Delete profile</button>
-        <button onClick={goBack} className='back-button'>
-          Back
-        </button>
+        <div className='settings-edition'>
+          <button className='btn-edit' onClick={toggleEditionMode}>
+            Edit your profile
+          </button>
+          {isEditionEnabled && (
+            <form
+              className='edit-form'
+              onSubmit={handleEdition}
+              style={{ display: 'flex' }}
+            >
+              <input type='text' name='description' placeholder={user.email} />
+              <button className='btn-edit'>Save</button>
+            </form>
+          )} 
+
+          <ul>
+            <li>Switch theme</li>
+            <li>Change language</li>
+          </ul>
+        </div>
+
+        <div className='settings-liked'>
+          <h2>Liked posts</h2>
+          {user.likedPosts && <p>{user.likedPosts[0].description}</p>
+          }
+        </div>
+
+      </div>
+
+      <div className='settings-delete'>
+        <button className='btn-delete' onClick={logOutUser}>Delete profile</button>
       </div>
     </>
   );

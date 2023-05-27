@@ -1,7 +1,48 @@
+.settings-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 2rem 10rem;
+  border-radius: 0.2rem;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.settings-intro {
+  margin: 2rem 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.settings-intro img {
+  padding: 0 1rem;
+}
+
+.settings-intro img:hover,
+.settings-intro img:focus {
+  background-color: white;
+  box-shadow: 0 0 0 3px #fea;
+  border-color: #fb1;
+  outline: none;
+  cursor: pointer;
+}
+
+.back {
+  background: #eee;
+  border-radius: 0.2rem;
+  padding: 0.38rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: 0.1s;
+}
+
 .graph {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  margin: 1rem;
 }
 
 .graphItem {
@@ -13,6 +54,45 @@
 
 .graphItem h2 {
   padding: 1rem;
+}
+
+.settings-edition {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-weight: 300;
+}
+
+.settings-liked {
+  margin: 1rem;
+}
+
+.settings-delete {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-delete {
+  background: rgb(204, 3, 3);
+  border-radius: 0.2rem;
+  color: white;
+  height: 3rem;
+  width: 10rem;
+  border: 1px solid transparent;
+  transition: 0.1s;
+  font-weight: 300;
+  position:absolute;
+}
+
+.btn-delete:focus,
+.btn-delete:hover {
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgb(255, 177, 170);
+  outline: none;
+  border-color: rgb(204, 3, 3);
+  color: rgb(204, 3, 3);
 }
 
 .total {
