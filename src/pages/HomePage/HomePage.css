@@ -117,4 +117,39 @@
     grid-column: initial;
     grid-row: initial;
   }
+
+  .feed-item:nth-child(20) {
+    grid-column: initial;
+    grid-row: initial;
+  }
+
+  .feed-item:nth-child(26) {
+    grid-column: initial;
+    grid-row: initial;
+  }
+
+  .feed-item:nth-child(32) {
+    grid-column: initial;
+    grid-row: initial;
+  }
+
+  .feed-item:nth-child(38) {
+    grid-column: initial;
+    grid-row: initial;
+  }
+
+  .feed-item:nth-child(44) {
+    grid-column: initial;
+    grid-row: initial;
+  }
+
+  .feed-item:nth-child(50) {
+    grid-column: initial;
+    grid-row: initial;
+  }
+
+  .feed-item:nth-child(56) {
+    grid-column: initial;
+    grid-row: initial;
+  }
 }
